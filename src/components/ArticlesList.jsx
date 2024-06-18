@@ -1,6 +1,7 @@
 import axios from "axios"
 import ArticleCard from "./ArticleCard"
 import { useEffect, useState } from "react"
+import getAllArticles from "../utils/api";
 function ArticlesList (){
     const [allArticles, setAllArticles]=useState([])
     const [error, setError] = useState(null);
@@ -8,7 +9,7 @@ function ArticlesList (){
 
     useEffect(()=>{
     setIsLoading(true)
-    axios.get(`https://be-news-api-server.onrender.com/api/articles`)
+    getAllArticles()
     .then(({data})=>{
         const articlesArr = data.articles.sort((a, b)=>{
            return  a.article_id -b.article_id

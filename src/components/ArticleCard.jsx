@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom"
-function ArticleCard ({allArticles, singleArticle}){
+import Comments from "./Comments"
+function ArticleCard ({allArticles, singleArticle, article_id}){
       if(typeof singleArticle === 'object'){
-         return <li className="SingleArticleId" key={singleArticle.article_id}>
+         return <>
+         <li className="SingleArticleId" key={singleArticle.article_id}>
         <h3>{singleArticle.title}</h3>
         <h4>By {singleArticle.author}</h4>
         <Link to="/"><img className="ImagebyArticleId" src={singleArticle.article_img_url} /></Link>
@@ -14,6 +16,8 @@ function ArticleCard ({allArticles, singleArticle}){
         <p><b>Article ID: </b>{singleArticle.article_id}</p>
         </div>
       </li> 
+        <Comments article_id={article_id} singleArticle={singleArticle}/>
+        </>
       }
       else {
  return <>
