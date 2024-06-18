@@ -56,3 +56,8 @@
 .descriptionBody {
     font-family:Verdana, Geneva, Tahoma, sans-serif
 }
+
+.commentsList {
+    border-top: solid black;
+    margin-top: 50px;
+}
