@@ -10,10 +10,7 @@ function ArticlesList (){
     useEffect(()=>{
     setIsLoading(true)
     getAllArticles()
-    .then(({data})=>{
-        const articlesArr = data.articles.sort((a, b)=>{
-           return  a.article_id -b.article_id
-        })
+    .then((articlesArr)=>{
         setIsLoading(false)
         setAllArticles(articlesArr)
         return articlesArr;
@@ -25,7 +22,7 @@ function ArticlesList (){
     if(error){
         return <p>404 Not Found. Try Again</p>
     }
-    if(isLoading) return <h4>Loading... Please Wait</h4>
+    if(isLoading) return <h4>Loading Articles... Please Wait. We Are Fetching Data</h4>
 return <ul>
     <ArticleCard allArticles={allArticles} />
 </ul>

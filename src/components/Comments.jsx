@@ -4,13 +4,27 @@ import { getAllCommentsByArticleId } from "../utils/api"
 
 function Comments ({article_id, singleArticle}){
    const [commentsById, setCommentsById] = useState([])
+   const [error, setError] = useState(null)
+   const [isLoading, setIsLoading] =useState(null)
 useEffect(()=>{
+    setIsLoading(true)
     getAllCommentsByArticleId(article_id)
-   .then(({data})=>{
-    const commentsArr = data.comments
+   .then((commentsArr)=>{
     setCommentsById(commentsArr)
+    setIsLoading(false)
    })
-},[])
+   .catch((err)=>{
+    setError(err)
+   })
+},[article_id])
+
+if(error) {
+    return <p>404 Route Not Found</p>
+}
+
+if(isLoading){
+    return <p>Loading Comments Please Wait...</p>
+}
 
 return <ol className="commentsList">
      <h2>Comments on {singleArticle.title}</h2>

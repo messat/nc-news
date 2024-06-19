@@ -1,25 +1,8 @@
 import { Link } from "react-router-dom"
-import Comments from "./Comments"
-function ArticleCard ({allArticles, singleArticle, article_id}){
-      if(typeof singleArticle === 'object'){
-         return <>
-         <li className="SingleArticleId" key={singleArticle.article_id}>
-        <h3>{singleArticle.title}</h3>
-        <h4>By {singleArticle.author}</h4>
-        <Link to="/"><img className="ImagebyArticleId" src={singleArticle.article_img_url} /></Link>
-        <div className="descriptionBody">
-        <p><b>Description: </b>{singleArticle.body}</p>
-        <p><b>Subject: </b>{singleArticle.topic}</p>
-        <p><b>Comments Count:</b> {singleArticle.comment_count}</p>
-        <p><b>Year Published: </b>{singleArticle.created_at ? singleArticle.created_at.slice(0,4): null}</p>
-        <p><b>Votes On Article: </b>{singleArticle.votes}</p>
-        <p><b>Article ID: </b>{singleArticle.article_id}</p>
-        </div>
-      </li> 
-        <Comments article_id={article_id} singleArticle={singleArticle}/>
-        </>
-      }
-      else {
+
+
+function ArticleCard ({allArticles}){
+  
  return <>
        {allArticles.length ? allArticles.map((article)=>(
         <li key={article.article_id} className="Article">
@@ -33,7 +16,7 @@ function ArticleCard ({allArticles, singleArticle, article_id}){
         </li>
 )):<p></p>}
 </>
-      }
+      
 }
 
 export default ArticleCard

@@ -1,7 +1,7 @@
 import Header from "./components/Header"
 import Navbar from "./components/Navbar"
 import ArticlesList from "./components/ArticlesList";
-import ArticleIdCard from "./components/ArticleIdCard";
+import IdCard from "./components/IdCard";
 import { Routes, Route } from 'react-router-dom';
 import ErrorPage from "./components/Error";
 
@@ -14,7 +14,7 @@ function App() {
     <Routes>
      <Route path="*" element={<ErrorPage/>} />
      <Route path ='/' element={<ArticlesList/>}></Route>
-     <Route path ='/articles/:article_id' element={<ArticleIdCard/>}></Route>
+     <Route path ='/articles/:article_id' element={<IdCard/>}></Route>
      </Routes>
     </>
   )
