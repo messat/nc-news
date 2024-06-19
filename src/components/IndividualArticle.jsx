@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom"
 import Comments from "./Comments"
 import Votes from "./eventListener/Votes"
+import PostComment from "./Forms/PostComment"
 
 function IndividualArticle ({singleArticle, setSingleArticle, article_id}){
-
-    return <>
+    return <section>
     <li className="SingleArticleId" key={singleArticle.article_id}>
    <h3>{singleArticle.title}</h3>
    <h4>By {singleArticle.author}</h4>
@@ -19,9 +19,9 @@ function IndividualArticle ({singleArticle, setSingleArticle, article_id}){
    <p><b>Article ID: </b>{singleArticle.article_id}</p>
    </div>
  </li> 
+   <PostComment article_id={article_id} setSingleArticle={setSingleArticle}/>
    <Comments article_id={article_id} singleArticle={singleArticle}/>
-   </>
-
+   </section>
 }
 
 export default IndividualArticle

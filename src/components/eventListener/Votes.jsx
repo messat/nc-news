@@ -1,19 +1,16 @@
-// import { useEffect, useState } from "react";
-import axios from "axios"
 import { useState } from "react"
 import { patchUpVotesClick, patchDownVotesClick, patchVipVotesClick } from "../../utils/api"
 
 function Votes ({article_id, setSingleArticle}){
     const [err, setErr]= useState(null)
 
-function UpvotesClick (){
+function upVotesClick (){
     patchUpVotesClick(article_id)
     .then(()=>{
         setErr(null)
     })
     .catch((err)=>{
          setErr(err)
-         alert('Please check connection')
          setSingleArticle((currentArticle)=>{
             return {...currentArticle, votes: currentArticle.votes -1}
          })
@@ -23,14 +20,13 @@ function UpvotesClick (){
     })
 }
 
-function DownVotesClick (){
+function downVotesClick (){
     patchDownVotesClick(article_id)
-    .then(({data})=>{
+    .then(()=>{
         setErr(null)
     })
     .catch((err)=>{
          setErr(err)
-         alert('Please check connection')
          setSingleArticle((currentArticle)=>{
             return {...currentArticle, votes: currentArticle.votes +1}
     })})
@@ -39,7 +35,7 @@ function DownVotesClick (){
     })
 }
 
-function VipVotesClick (){
+function vipVotesClick (){
     patchVipVotesClick(article_id)
     .then(()=>{
         setErr(null)
@@ -53,19 +49,21 @@ function VipVotesClick (){
         return {...currentArticle, votes: currentArticle.votes + 100}
     })
 }
-return <>
+
+if(err) return <p>Your Vote Was Not Casted. Please Try Again.</p>
+return <section>
    <button className="UpVotes" onClick={()=>{
-       UpvotesClick()
+       upVotesClick()
       }}
     >👍</button> 
    <button onClick={()=>{
-         DownVotesClick()
+         downVotesClick()
    }}>👎</button> <br></br>
    <button onClick={()=>{
-         VipVotesClick()
+         vipVotesClick()
    }} className="VipEffects">👌 VIP Member</button>
    {err ? <p>Something Went Wrong. Please try Again</p>: null}
-   </>
+   </section>
 }
 
 export default Votes

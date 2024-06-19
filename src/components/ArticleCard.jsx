@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 function ArticleCard ({allArticles}){
   
- return <>
+ return <section>
        {allArticles.length ? allArticles.map((article)=>(
         <li key={article.article_id} className="Article">
         <h3 className="ArticleTitle">{article.title}</h3>
@@ -14,9 +14,8 @@ function ArticleCard ({allArticles}){
         <p>Comments Count: {article.comment_count}</p>
         <p>Votes On Article: {article.votes}</p>
         </li>
-)):<p></p>}
-</>
-      
+)):null}
+</section>
 }
 
 export default ArticleCard
