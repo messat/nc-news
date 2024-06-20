@@ -44,6 +44,25 @@ function patchVipVotesClick(article_id){
     const patchBody = {inc_votes: 100}
     return instance.patch(`/articles/${article_id}`, patchBody)
 }
+
+function getAllUsers(){
+    return instance.get('/users')
+    .then(({data})=>{
+        const usersArr = data.users
+        return usersArr
+    })
+}
+
+function singleUser(username){
+    return instance.get(`/users/${username}`)
+    .then(({data})=>{
+        return data.user[0];
+    })
+}
+
+function postNewComment (article_id, newUser){
+    return instance.post(`/articles/${article_id}/comments`, newUser)
+}
 export default getAllArticles
 
-export {getSingleArticle, getAllCommentsByArticleId, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick}
+export {getSingleArticle, getAllCommentsByArticleId, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick, getAllUsers, postNewComment, singleUser}

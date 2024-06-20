@@ -1,12 +1,12 @@
-import axios from "axios"
 import ArticleCard from "./ArticleCard"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import getAllArticles from "../utils/api";
+import { UserContext } from "../context/UserContext";
 function ArticlesList (){
     const [allArticles, setAllArticles]=useState([])
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading]= useState(null)
-
+    const {loggedIn}= useContext(UserContext)
     useEffect(()=>{
     setIsLoading(true)
     getAllArticles()

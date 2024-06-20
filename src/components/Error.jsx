@@ -1,5 +1,5 @@
 function ErrorPage (){
-return <p>404 Route Not Found</p>
+return <h1>404 Route Not Found</h1>
 
 }
 
