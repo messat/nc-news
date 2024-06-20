@@ -53,9 +53,16 @@ function getAllUsers(){
     })
 }
 
-function postNewComment (article_id){
-    return instance.post(`/articles/${article_id}/comments`)
+function singleUser(username){
+    return instance.get(`/users/${username}`)
+    .then(({data})=>{
+        return data.user[0];
+    })
+}
+
+function postNewComment (article_id, newUser){
+    return instance.post(`/articles/${article_id}/comments`, newUser)
 }
 export default getAllArticles
 
-export {getSingleArticle, getAllCommentsByArticleId, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick, getAllUsers, postNewComment}
+export {getSingleArticle, getAllCommentsByArticleId, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick, getAllUsers, postNewComment, singleUser}

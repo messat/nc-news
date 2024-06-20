@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import Comments from "./Comments"
 import Votes from "./eventListener/Votes"
-import PostComment from "./Forms/PostComment"
 
 function IndividualArticle ({singleArticle, setSingleArticle, article_id}){
     return <section>
@@ -15,12 +14,12 @@ function IndividualArticle ({singleArticle, setSingleArticle, article_id}){
    <p><b>Comments Count:</b> {singleArticle.comment_count}</p>
    <p><b>Year Published: </b>{singleArticle.created_at ? singleArticle.created_at.slice(0,4): null}</p>
    <p><b>Votes On Article: </b>{singleArticle.votes}</p> 
+   
   <Votes article_id={article_id} setSingleArticle={setSingleArticle} />
    <p><b>Article ID: </b>{singleArticle.article_id}</p>
    </div>
  </li> 
-   <PostComment article_id={article_id} setSingleArticle={setSingleArticle}/>
-   <Comments article_id={article_id} singleArticle={singleArticle}/>
+   <Comments article_id={article_id} singleArticle={singleArticle} setSingleArticle={setSingleArticle}/>
    </section>
 }
 

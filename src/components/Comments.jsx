@@ -1,8 +1,8 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
 import { getAllCommentsByArticleId } from "../utils/api"
+import PostComment from "./Forms/PostComment"
 
-function Comments ({article_id, singleArticle}){
+function Comments ({article_id, singleArticle, setSingleArticle}){
    const [commentsById, setCommentsById] = useState([])
    const [error, setError] = useState(null)
    const [isLoading, setIsLoading] =useState(null)
@@ -26,7 +26,9 @@ if(isLoading){
     return <p>Loading Comments Please Wait...</p>
 }
 
-return <ol className="commentsList">
+return <section>
+<PostComment article_id={article_id} setSingleArticle={setSingleArticle} setCommentsById={setCommentsById}/>
+<ol className="commentsList">
      <h2>Comments on {singleArticle.title}</h2>
       {commentsById.map((comment)=>(
         <li key={comment.comment_id}><h4><b>Author: </b>{comment.author}</h4>
@@ -36,6 +38,7 @@ return <ol className="commentsList">
         </li>
       ))}
      </ol>
+     </section>
 }
 
 export default Comments

@@ -1,7 +1,5 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { Link } from "react-router-dom"
 import { getSingleArticle } from "../utils/api"
 import IndividualArticle from "./IndividualArticle"
 function IdCard (){

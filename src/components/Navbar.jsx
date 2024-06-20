@@ -1,16 +1,28 @@
 import { Link } from "react-router-dom"
 import Button from '@mui/material/Button';
-import ArticlesList from "./ArticlesList";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
+
 
 function Navbar (){
- return (
-    <nav className="NavBar">
+  const {loggedIn} = useContext(UserContext)
+  if(loggedIn.username){
+      return  <nav className="NavBar">
         <Link to="/"><Button className="homeButton" variant="contained">Home</Button></Link>        
-        <Button variant="contained">Post New Comment</Button>
+        <Link to="/users/logOut"><Button variant="contained">Log Out</Button></Link>
         <Button variant="contained">Topic Of Articles</Button>
         <Button variant="contained">Sort Article Search</Button>
     </nav>
+    } else {
+ return ( 
+    <nav className="NavBar">
+        <Link to="/"><Button className="homeButton" variant="contained">Home</Button></Link>        
+        <Link to="/users/login"><Button variant="contained">Log In</Button></Link>
+        <Button variant="contained">Topic Of Articles</Button>
+        <Button variant="contained">Sort Article Search</Button>
+    </nav> 
  )
+}
 }
 
 export default Navbar
