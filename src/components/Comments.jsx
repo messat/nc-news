@@ -55,17 +55,14 @@ if(isLoading){
     return <p>Loading Comments Please Wait...</p>
 }
 
-if(deleteMessage){
-    return <p>This comment is now deleted</p>
-}
 
 return <section>
 <PostComment article_id={article_id} setSingleArticle={setSingleArticle} setCommentsById={setCommentsById}/>
 <ol className="commentsList">
      <h2>Comments on {singleArticle.title}</h2>
+     {deleteMessage ? <p>Comment has now deleted</p> : null}
       {commentsById.map((comment)=>(
-        <li key={comment.comment_id}><h4><b>Author: </b>{comment.author}</h4>
-
+          <li key={comment.comment_id}><h4><b>Author: </b>{comment.author}</h4>
             <h6>Date Of Comment: {comment.created_at.slice(0,10)} </h6>
             <p><b>Comment: </b> {comment.body}</p>
             <p><b>Helpful: </b>{comment.votes}</p>
