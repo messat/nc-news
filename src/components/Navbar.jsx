@@ -10,7 +10,7 @@ function Navbar (){
       return  <nav className="NavBar">
         <Link to="/"><Button className="homeButton" variant="contained">Home</Button></Link>        
         <Link to="/users/logOut"><Button variant="contained">Log Out</Button></Link>
-        <Button variant="contained">Topic Of Articles</Button>
+        <Link to="/articles/topics"><Button variant="contained">Topic Of Articles</Button></Link>
         <Button variant="contained">Sort Article Search</Button>
     </nav>
     } else {
@@ -18,7 +18,7 @@ function Navbar (){
     <nav className="NavBar">
         <Link to="/"><Button className="homeButton" variant="contained">Home</Button></Link>        
         <Link to="/users/login"><Button variant="contained">Log In</Button></Link>
-        <Button variant="contained">Topic Of Articles</Button>
+        <Link to="/articles/topics"><Button variant="contained">Topic Of Articles</Button></Link>
         <Button variant="contained">Sort Article Search</Button>
     </nav> 
  )
