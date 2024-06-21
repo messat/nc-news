@@ -63,6 +63,10 @@ function singleUser(username){
 function postNewComment (article_id, newUser){
     return instance.post(`/articles/${article_id}/comments`, newUser)
 }
+
+function deleteComment (comment){
+    return instance.delete(`/comments/${comment.comment_id}`)
+}
 export default getAllArticles
 
-export {getSingleArticle, getAllCommentsByArticleId, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick, getAllUsers, postNewComment, singleUser}
+export {getSingleArticle, getAllCommentsByArticleId, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick, getAllUsers, postNewComment, singleUser, deleteComment}

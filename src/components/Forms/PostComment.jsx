@@ -28,12 +28,9 @@ function PostComment ({article_id, setCommentsById}){
     })
 } 
 }
-
     function handleReset(){
     setErr(false)
     }
-
-
     if(err) {
         return <section>
         <p>No username Found</p>
