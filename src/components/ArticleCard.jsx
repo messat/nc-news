@@ -1,8 +1,5 @@
 import { Link } from "react-router-dom"
-
-
 function ArticleCard ({allArticles}){
-  
  return <section>
        {allArticles.length ? allArticles.map((article)=>(
         <li key={article.article_id} className="Article">
