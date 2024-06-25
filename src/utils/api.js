@@ -4,14 +4,12 @@ const instance = axios.create({
     baseURL:"https://be-news-api-server.onrender.com/api"
 })
 
-function getAllArticles (){
-  return instance.get("/articles")
-  .then(({data})=>{
+async function getAllArticles (){
+  const {data} = await instance.get("/articles")
     const articlesArr = data.articles.sort((a, b)=>{
         return  a.article_id -b.article_id
      })
      return articlesArr
-  })
 }
 
 function getSingleArticle (article_id){

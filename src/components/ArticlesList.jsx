@@ -1,12 +1,10 @@
 import ArticleCard from "./ArticleCard"
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import getAllArticles from "../utils/api";
-import { UserContext } from "../context/UserContext";
 function ArticlesList (){
     const [allArticles, setAllArticles]=useState([])
-    const [error, setError] = useState(null);
+    const [err, setErr] = useState(null);
     const [isLoading, setIsLoading]= useState(null)
-    const {loggedIn}= useContext(UserContext)
     useEffect(()=>{
     setIsLoading(true)
     getAllArticles()
@@ -15,11 +13,12 @@ function ArticlesList (){
         setAllArticles(articlesArr)
         return articlesArr;
     })
-    .catch((err)=>{
-    setError(err)
+    .catch((err)=>{3
+    setErr(err)
     })
     }, [])
-    if(error){
+    if(err){
+        console.log(err)
         return <p>404 Not Found. Try Again</p>
     }
     if(isLoading) return <h4>Loading Articles... Please Wait. We Are Fetching Data</h4>
