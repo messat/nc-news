@@ -9,6 +9,7 @@ export default defineConfig({
   },
   resolve: {
     // Ensure Vite resolves dependencies correctly
+    mainFields: [],
     alias: {
       stream: 'stream-browserify',
       util: 'util',
