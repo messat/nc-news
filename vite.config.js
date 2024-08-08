@@ -8,4 +8,7 @@ export default defineConfig({
   resolve: {
     mainFields: [],
   },
+  build: {
+    outDir: 'dist', 
+  },
 })
