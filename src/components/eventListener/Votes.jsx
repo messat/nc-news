@@ -1,7 +1,9 @@
 import { useState } from "react"
 import { patchUpVotesClick, patchDownVotesClick, patchVipVotesClick } from "../../utils/api"
+import { BiUpvote, BiDownvote } from "react-icons/bi";
 
-function Votes ({article_id, setSingleArticle}){
+
+function Votes ({article_id, setSingleArticle, singleArticle}){
     const [err, setErr]= useState(null)
 
 function upVotesClick (){
@@ -35,33 +37,24 @@ function downVotesClick (){
     })
 }
 
-function vipVotesClick (){
-    patchVipVotesClick(article_id)
-    .then(()=>{
-        setErr(null)
-    })
-    .catch((err)=>{
-         setErr(err)
-         setSingleArticle((currentArticle)=>{
-            return {...currentArticle, votes: currentArticle.votes - 100}
-    })})
-    setSingleArticle((currentArticle)=>{
-        return {...currentArticle, votes: currentArticle.votes + 100}
-    })
-}
+
 
 if(err) return <p>Your Vote Was Not Casted. Please Try Again.</p>
-return <section>
-   <button className="UpVotes" onClick={()=>{
+return <section className="Votes">
+    <BiUpvote className="Upvote" size={40} onClick={()=>{
        upVotesClick()
-      }}
-    >👍</button> 
-   <button onClick={()=>{
+      }}/>
+      {singleArticle.votes ? <p className="Count">{singleArticle.votes}</p> : <p className="Count">Vote</p>}
+   <BiDownvote className="Downvote" size={40} onClick={()=>{
          downVotesClick()
-   }}>👎</button> <br></br>
-   <button onClick={()=>{
-         vipVotesClick()
-   }} className="VipEffects">👌 VIP Member</button>
+   }} /> 
+
+   
+
+
+
+   <br></br>
+   
    {err ? <p>Something Went Wrong. Please try Again</p>: null}
    </section>
 }

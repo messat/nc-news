@@ -1,6 +1,8 @@
 import ArticleCard from "./ArticleCard"
 import { useEffect, useState } from "react"
 import getAllArticles from "../utils/api";
+import LinearWithValueLabel from "./Loading/Loading-UI";
+import AllNewsArticles from "./AllArticles";
 function ArticlesList (){
     const [allArticles, setAllArticles]=useState([])
     const [err, setErr] = useState(null);
@@ -13,17 +15,24 @@ function ArticlesList (){
         setAllArticles(articlesArr)
         return articlesArr;
     })
-    .catch((err)=>{3
+    .catch((err)=>{
     setErr(err)
     })
     }, [])
     if(err){
-        console.log(err)
-        return <p>404 Not Found. Try Again</p>
+        return <p className="Error-Message">404 Not Found. Try Again</p>
     }
-    if(isLoading) return <h4>Loading Articles... Please Wait. We Are Fetching Data</h4>
+    if(isLoading) {
+        return (<div className="LoadingScreen">
+            <p className="LoadingText">Loading. Please Wait . . .</p>
+            < LinearWithValueLabel size={50} />
+        </div>)
+    }
+    
+
 return <ul>
     <ArticleCard allArticles={allArticles} />
+    <AllNewsArticles allArticles={allArticles}/>
 </ul>
 
 }

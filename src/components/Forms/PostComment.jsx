@@ -1,33 +1,51 @@
+import * as React from 'react';
 import { useContext, useState } from "react";
 import { postNewComment } from "../../utils/api";
 import { UserContext } from "../../context/UserContext";
+import MultilineTextFields from "../../atoms/MUI-TextField";
+import { useNavigate } from "react-router-dom";
+import Button from '@mui/material/Button';
+import {ErrorAlert, SuccessAlert} from '../../atoms/MUI-Alert';
+
+
 function PostComment ({article_id, setCommentsById}){
     const {loggedIn} = useContext(UserContext)
     const [comment, setComment]=useState('')
     const [err, setErr]=useState(false)
     const [loadingComment, setLoadingComment] = useState(null)
-    function handleComment(event){
-       setComment(event.target.value)
-    }
+    const navigate = useNavigate()
+    const [showAlert, setShowAlert] = useState(false)
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+
+    
     function handleSubmit (event){
-    event.preventDefault()
-    const newUser = {username: loggedIn.username, body: comment}
-    setErr(false)
-    if(loggedIn.username){
-        setLoadingComment(true)
-    postNewComment(article_id, newUser)
-    .then(()=>{
-        setLoadingComment(false)
-        setCommentsById((currentCommentsArr)=>{
-            setComment('')
+        event.preventDefault()
+        const newUser = {username: loggedIn.username, body: comment}
+        setErr(false)
+        if(loggedIn.username){
+            setShowSuccessAlert(true)
+            setShowAlert(false)
+            setLoadingComment(true)
+            postNewComment(article_id, newUser)
+            .then(()=>{
+
+                setLoadingComment(false)
+                setCommentsById((currentCommentsArr)=>{
+                setComment('')
             return [{author: loggedIn.username, created_at: Date.now().toString(), body: comment, votes: 0},  ...currentCommentsArr]
         })
     })
     .catch(()=>{
        setErr(true)
     })
-} 
+    }  else {
+        setShowSuccessAlert(false)
+        setShowAlert(true)
+    }
 }
+
+
+
     function handleReset(){
     setErr(false)
     }
@@ -37,20 +55,28 @@ function PostComment ({article_id, setCommentsById}){
         <button onClick={handleReset}>Reset</button>
         </section>}
 
+    function navigateSignIn (){
+        navigate('/users/login')
+    }
+
+    function removeText (){
+        setComment('')
+    }
 if(loadingComment) {
     setLoadingComment(false)
     return <h2>Loading... Please wait while your comment is being posted</h2>}
 
-return (
-    <section>
+return (<section>
         <form onSubmit={handleSubmit}>
-            <h3>Add Comment</h3>
-            <label htmlFor="Comment">Comment: </label>
-            <input type="text" id="Comment" placeholder="Add a comment..." onChange={handleComment} value={comment} required/>
-            <button type="submit">Comment</button>
-        </form>
-        {!loggedIn.username ? <h2>Please Log In To Your Account To Post A Comment</h2> : null}
-        </section>
+             <span>{!loggedIn.username ? <img src="https://cdn-icons-png.flaticon.com/512/152/152532.png" className="SignInButton" onClick={navigateSignIn}/> : 
+             <img src={loggedIn.avatar_url} className="SignInButton" onClick={navigateSignIn}/>}
+            <MultilineTextFields setComment={setComment} comment={comment}/></span>
+            <Button sx={{backgroundColor: "primary", marginLeft: "46em"}} onClick={removeText}>Cancel</Button>        
+            <Button type="submit" sx={{backgroundColor: "grey", color: "white", marginLeft: "53em", marginTop: "-4.4em"}}>Comment</Button>
+            {showAlert ? <ErrorAlert /> : null}
+            {showSuccessAlert ? <SuccessAlert/> : null}
+            </form>
+        </section>  
 )
 }
 

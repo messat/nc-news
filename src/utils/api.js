@@ -4,12 +4,23 @@ const instance = axios.create({
     baseURL:"https://be-news-api-server.onrender.com/api"
 })
 
-async function getAllArticles (){
-  const {data} = await instance.get("/articles")
-    const articlesArr = data.articles.sort((a, b)=>{
-        return  a.article_id -b.article_id
-     })
-     return articlesArr
+async function getAllArticles (topic){
+    if(topic){
+        const {data} = await instance.get(`/articles?topic=${topic}`)
+        const topicsArticleArr = data.articles
+        return topicsArticleArr
+    } else {
+        const {data} = await instance.get("/articles")
+          const articlesArr = data.articles
+           return articlesArr
+    }
+}
+
+function getAllTopics (){
+    return instance.get(`/topics`)
+            .then(({data})=>{
+                return data.topics
+            })
 }
 
 function getSingleArticle (article_id){
@@ -65,6 +76,16 @@ function postNewComment (article_id, newUser){
 function deleteComment (comment){
     return instance.delete(`/comments/${comment.comment_id}`)
 }
+
+function patchUpVoteComment (comment_id){
+    const patchVote = {inc_votes: 1}
+    return instance.patch(`/comments/${comment_id}`, patchVote)
+}
+
+function patchDownVoteComment (comment_id){
+    const patchVote = {inc_votes: -1}
+    return instance.patch(`/comments/${comment_id}`, patchVote)
+}
 export default getAllArticles
 
-export {getSingleArticle, getAllCommentsByArticleId, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick, getAllUsers, postNewComment, singleUser, deleteComment}
+export {getAllTopics, getSingleArticle, getAllCommentsByArticleId, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick, getAllUsers, postNewComment, singleUser, deleteComment,patchUpVoteComment, patchDownVoteComment }
