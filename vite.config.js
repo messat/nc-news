@@ -8,14 +8,6 @@ export default defineConfig({
     outDir: 'dist',
   },
   resolve: {
-    // Ensure Vite resolves dependencies correctly
     mainFields: [],
-    alias: {
-      stream: 'stream-browserify',
-      util: 'util',
-    },
-  },
-  optimizeDeps: {
-    include: ['axios'], // Ensure axios and its dependencies are included
   },
 });
