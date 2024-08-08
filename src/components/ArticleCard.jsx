@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom"
-import getAllArticles, { getSingleArticle } from "../utils/api"
+import { getSingleArticle } from "../utils/api"
 import { useEffect, useState } from "react"
 import { MdReadMore } from "react-icons/md";
 import Moment from "react-moment";
-import styled from "styled-components";
 
 function ArticleCard ({allArticles}){
       const [latestNews, setLatestNews]= useState('')
