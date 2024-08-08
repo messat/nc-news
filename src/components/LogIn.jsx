@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { getAllUsers } from "../utils/api"
 import { useNavigate } from "react-router-dom"
 import { UserContext } from "../context/UserContext"
+import SignInCard from "../atoms/MUI-Card/MUI-LogInCard"
 
 function LogIn (){
     const {setLoggedIn}= useContext(UserContext)
@@ -21,16 +22,21 @@ function LogIn (){
        navigate('/')
     }
 if(isLoading) return <h2>Loading... Please Wait. We Are Fetching Your Profile Data.</h2>
-   return <section className="allUsersBlock">
+   return <section>
+         <header>
+        <hr className="HorizontalLine"></hr> 
+            <h1 className="TopicHeading">Log In</h1> 
+            <hr></hr>
+        </header>
+        <div style={{display: "flex", flexWrap: "wrap",justifyContent: "space-between", gap: "90px"}}>
         {users.map((user)=>(
            <li key={user.username} onClick={()=>{
             handleLogIn(user)
            }}>
-                <img className="avatar" src={user.avatar_url}/>
-                <h3>Name: {user.name}</h3>
-                <h4>Username: {user.username}</h4>
+            <SignInCard user={user}/>
             </li>
         ))} 
+        </div>
    </section>
 
 }

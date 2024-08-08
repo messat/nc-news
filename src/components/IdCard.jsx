@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getSingleArticle } from "../utils/api"
 import IndividualArticle from "./IndividualArticle"
+import LinearWithValueLabel from "./Loading/Loading-UI"
 function IdCard (){
     const {article_id} = useParams()
     const [singleArticle, setSingleArticle]= useState({})
@@ -20,11 +21,15 @@ function IdCard (){
       })
     }, [article_id])
 
-if(isLoading) return <h4>Loading Article... Please Wait</h4>
-
-return <ul>
+if(isLoading) {
+  return (<div className="LoadingScreen">
+      <p className="LoadingText">Loading. Please Wait . . .</p>
+      <LinearWithValueLabel size={50} />
+  </div>)
+}
+return <section>
     <IndividualArticle singleArticle={singleArticle} setSingleArticle={setSingleArticle} article_id={article_id}/>
-   </ul>
+   </section>
 }
 
 export default IdCard
