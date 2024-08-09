@@ -2,8 +2,6 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import getAllArticles from "../utils/api"
 import TopicsPage from "./TopicsPage"
-import Divider from '@mui/joy/Divider';
-
 
 function TopicArticlesHeader (){
     let {topic} = useParams()
