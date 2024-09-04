@@ -27,21 +27,24 @@
     position: sticky;
     top: 0;
     width: 100%;
-    background-color: white;
+    background-color: black;
 
 }
 
 .NCLogo {
-    margin-top: 1rem;
-    margin-left: 0.5rem;
-    height: 70px;
+    margin-top: 1.9rem;
+    margin-left: 3rem;
+    height: 60px;
     width: 90px;
     border-right: 2.5px solid #f34040;
     float: left;
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: xxx-large;
+    font-weight: 500;
 }
 
 .NavBar {
-   margin-top: 1rem; 
    z-index: 100000000990;
    width: 100%;
 }
@@ -53,23 +56,23 @@
 }
 
 .heading-text {
-    color: rgba(9, 9, 45, 0.861);
-    font-size: x-large;
+    color: white;
+    font-size: xx-large;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 0.3em;
 }
 
 .LogInLogo {
-    margin-left: 28em;
-    margin-top: 30px;
+    margin-left: 10em;
+    margin-top: 1.5em;
 }
 
-.NewsTitle {
-    display: block;
-    margin-top: 60px;
-    margin-left: auto;
-    margin-right: auto;
-    height: 60px;
-    width: 50%;
-    margin-bottom: 45px;
+.Title {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 55px;
 }
 
 
@@ -82,28 +85,8 @@
     float: left
 }
 
-.LatestTopic {
-    margin-top: 4.5em;
-    margin-left: 4em;
-    border: 0px;
-    font-weight: 500;
-    font-size: large;
-    color: rgba(122, 118, 118, 0.805);
-    border-right: 2.5px solid #f34040;
-    margin-right: 34em;
-    
-}
 
-.LatestDate {
-    color: rgba(122, 118, 118, 0.805);
-    font-weight: 500;
-    font-size: large;
-    text-align: center;
-    position: relative;
-    top: -2.4em;
-    left: 9em;
 
-}
 
 
 

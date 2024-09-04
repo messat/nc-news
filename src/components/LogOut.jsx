@@ -17,7 +17,7 @@ function LogOut (){
 if(loggedIn.username){
 
 
-    return <section>
+    return <section className="container">
          <header>
         <hr className="HorizontalLine"></hr> 
         <h1 className="TopicHeading">Log Out</h1> 
