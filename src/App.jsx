@@ -13,7 +13,7 @@ import TopicArticlesHeader from "./components/TopicArticlesHeader";
 
 function App() {
   const [loggedIn, setLoggedIn]= useState({})
-  return (<div className="container">
+  return (<div className="">
    <UserContext.Provider value={{loggedIn, setLoggedIn}}>
     <div className="HeadingBar">
    <Header/>

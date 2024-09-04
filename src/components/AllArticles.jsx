@@ -6,7 +6,7 @@ function AllNewsArticles ({allArticles}){
   })
 
   if(allArticles.length){
-return <section className="ArticleCards">
+return <section className="ArticleCards container">
   <div style={{display: "flex", justifyContent: "space-between", gap: "20px", flexWrap: "wrap"}}>
 {filterArticles.map((article)=>(
     <li key={article.article_id}>

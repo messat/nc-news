@@ -13,7 +13,7 @@ function TopicArticlesHeader (){
         })
     }, [topic])
 
-return (<section>
+return (<section className="container">
     <header>
         <hr className="HorizontalLine"></hr> 
         <h1 className="TopicHeading">{topic.slice(0,1).toUpperCase() + topic.slice(1)}</h1> 

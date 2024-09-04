@@ -27,7 +27,7 @@ if(isLoading) {
       <LinearWithValueLabel size={50} />
   </div>)
 }
-return <section>
+return <section className="container">
     <IndividualArticle singleArticle={singleArticle} setSingleArticle={setSingleArticle} article_id={article_id}/>
    </section>
 }

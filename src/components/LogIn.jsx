@@ -22,7 +22,7 @@ function LogIn (){
        navigate('/')
     }
 if(isLoading) return <h2>Loading... Please Wait. We Are Fetching Your Profile Data.</h2>
-   return <section>
+   return <section className="container">
          <header>
         <hr className="HorizontalLine"></hr> 
             <h1 className="TopicHeading">Log In</h1> 
