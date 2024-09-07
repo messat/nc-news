@@ -28,6 +28,7 @@
     top: 0;
     width: 100%;
     background-color: black;
+    z-index: 10000009999999;
 
 }
 
@@ -45,8 +46,11 @@
 }
 
 .NavBar {
-   z-index: 100000000990;
    width: 100%;
+}
+
+.navHeadings {
+    width: 70%;
 }
 
 .btn {
@@ -60,10 +64,13 @@
     font-size: xx-large;
     font-family: 'Times New Roman', Times, serif;
     margin-bottom: 0.3em;
+    padding-right: 50px;
+    margin-left: 350px;
+    
 }
 
 .LogInLogo {
-    margin-left: 10em;
+    margin-left: 12em;
     margin-top: 1.5em;
 }
 
@@ -73,6 +80,7 @@
     margin-top: 20px;
     font-weight: 500;
     font-size: 55px;
+    margin-bottom: 40px;
 }
 
 
@@ -85,6 +93,18 @@
     float: left
 }
 
+
+
+.LatestDate {
+    color: rgba(122, 118, 118, 0.805);
+    font-weight: 500;
+    font-size: large;
+    text-align: center;
+    position: relative;
+    top: -1.8em;
+    left: 6em;
+
+}
 
 
 
@@ -117,14 +137,14 @@
     font-size: large;
     border-right: 2.5px solid #f34040;
     position: relative;
-    margin-right: 34em;
+    margin-right: 41rem;
 }
 
 .LatestVotes {
     color: rgba(122, 118, 118, 0.805);
     font-weight: 500;
     font-size: large;
-    margin-left: 38em;  
+    margin-left: 36.5em;  
     margin-top: -2.3em;
 }
 
@@ -147,6 +167,17 @@
 li {
     list-style-type: none;
 }
+
+.card-img {
+    height: 220px ;
+    width: 350px;
+}
+
+
+.CardTitleContainer {
+    height: 110px;
+}
+
 
 .BorderTopic {
     border-right: 2.5px solid #f34040;
