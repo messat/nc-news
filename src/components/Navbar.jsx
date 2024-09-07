@@ -22,14 +22,13 @@ function Navbar (){
   const {loggedIn} = useContext(UserContext)
   if(loggedIn.username){
      return (
-      <nav className="NavBar container">
+      <nav className="NavBar">
         <Link to="/"><button type="button" className="btn heading-text">News</button></Link>        
         {topics.map((topicObj)=>
             <Link to={`/articles/topic/${topicObj.slug}`}><button type="button" className="btn heading-text" key={topicObj.slug}>{topicObj.slug.slice(0,1).toUpperCase() + topicObj.slug.slice(1)}</button></Link>
         )}
         <div className="LogInMessage">
-        <p className="LogInName">{loggedIn.name}</p>
-        <Link to="/users/logout"><img src={loggedIn.avatar_url} className="AvatarSignInLogo"/></Link>
+        <Link to="/users/logout"><img src={loggedIn.avatar_url} className="LogInLogo AvatarSignInLogo"/></Link>
         </div>
       </nav> 
      )
@@ -37,13 +36,14 @@ function Navbar (){
     else {
       return ( 
        <nav className="NavBar">
-        <div className="container">
+     
         <Link to="/"><button type="button" className="btn heading-text">News</button></Link>        
         {topics.map((topicObj)=>
             <Link to={`/articles/topic/${topicObj.slug}`}><button type="button" className="btn heading-text" key={topicObj.slug}>{topicObj.slug.slice(0,1).toUpperCase() + topicObj.slug.slice(1)}</button></Link>
         )}
+       
         <Link to="/users/login"><LuUserCircle2 className="LogInLogo" size={50} color="white" /></Link>
-        </div>
+      
       </nav> 
  )
 }

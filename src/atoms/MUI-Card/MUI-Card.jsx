@@ -43,26 +43,30 @@ function ArticleCards({article}) {
     <Link to={`/articles/${article.article_id}`} style={{textDecoration: "None"}}>
     <Card sx={cardStyling} className='LogInCard'>
       <CardContent>
+
       <img src={article.article_img_url} className="card-img" alt="..." />
-        <Typography variant="h5" component="div" sx={{textAlign: "center", fontWeight: 600, fontFamily: "playfair display sc", fontSize: "24px", marginTop: "1em"}}>
+
+      <div className='CardTitleContainer'>
+        <Typography variant="h5" component="div" sx={{textAlign: "center", fontWeight: 600, fontFamily: "playfair display sc", fontSize: "24px", marginTop: "0.5em"}}>
         {article.title}
         </Typography>
+      </div>
+
         <div style={{display: "flex", flexDirection: 'column', marginTop: "20px", marginBottom:"20px"}}>
-
-        
         <Typography sx={{fontWeight: 500, color: "rgba(122, 118, 118, 0.805)", fontSize: "large", textAlign: "center", alignItems: "flex-end"}} color="text.secondary">
-
         {article.topic.slice(0,1).toUpperCase() + article.topic.slice(1)} <span className="BorderTopic"></span>
         <Moment format='D MMMM YYYY'>
           {article.created_at}
         </Moment>
         </Typography>
         </div>
+
         <Typography variant="body2">
           {articleBody(article.article_id, article)}
           {users.length && filterUser(article)}
         <span className="Username">@{article.author}</span>
         </Typography>
+
       </CardContent>
     </Card>
     </Link>
