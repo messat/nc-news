@@ -1,4 +1,3 @@
-
 .Error-Message {
     margin-top: 1em;
     margin-left: 12em;
@@ -10,17 +9,18 @@
 }
 
 .LoadingScreen{
-    margin-top: 10em;
-    margin-left: 4em;
-    font-weight: 600;
-    font-size: larger;
+    margin-top: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .LoadingText {
-    margin-left: 40%;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: larger;
+    font-weight: 600;
 }
-
 
 
 .HeadingBar {
@@ -29,11 +29,11 @@
     width: 100%;
     background-color: black;
     z-index: 10000009999999;
-
+    height: 100px;
 }
 
 .NCLogo {
-    margin-top: 1.9rem;
+    margin-top: 1.3rem;
     margin-left: 3rem;
     height: 60px;
     width: 90px;
@@ -45,34 +45,107 @@
     font-weight: 500;
 }
 
+
 .NavBar {
-   width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    height: 100px;
 }
 
-.navHeadings {
-    width: 70%;
+.NavHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
 }
 
-.btn {
-    margin-right: 20px;
-    margin-left: 50px;
-    margin-top: 30px;
+.NavLinks {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: space-around;
 }
+
+.NavLinks.Open {
+    flex-direction: column;
+}
+  
+.NavLinks li {
+    display: inline-block;
+}
+  
+
+
+
+.Hamburger {
+    display: none;
+    font-size: 24px;
+    background: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 800px) {
+    .NavBar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        background-color: black;
+        color: white;
+        padding: 10px;
+        position: relative;
+    }
+
+    .NavHeader {
+        padding-right: 10px;
+    }
+      
+    .NavLinks {
+        display: none; 
+        flex-direction: column;
+        background-color: black;
+        width: 100%;
+        padding: 10px 10px;
+        align-items: end;
+    }
+  
+    .NavLinks.Open {
+      display: flex;
+    }
+  
+    .Hamburger {
+      display: block;
+    }
+ }
 
 .heading-text {
     color: white;
     font-size: xx-large;
     font-family: 'Times New Roman', Times, serif;
-    margin-bottom: 0.3em;
-    padding-right: 50px;
-    margin-left: 350px;
     
 }
 
-.LogInLogo {
-    margin-left: 12em;
-    margin-top: 1.5em;
+.heading-text:hover {
+    text-decoration: underline;
 }
+
+.LogInLogo {
+    color: white;
+}
+
+.LogInLogo:hover {
+    color: rgb(45, 45, 233);
+}
+
 
 .Title {
     text-align: center;
@@ -105,10 +178,6 @@
     left: 6em;
 
 }
-
-
-
-
 
 .LatestArticleTitle {
     font-weight: 700;

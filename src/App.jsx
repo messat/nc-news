@@ -13,12 +13,14 @@ import TopicArticlesHeader from "./components/TopicArticlesHeader";
 
 function App() {
   const [loggedIn, setLoggedIn]= useState({})
-  return (<div className="">
+  return (<div>
    <UserContext.Provider value={{loggedIn, setLoggedIn}}>
-    <div className="HeadingBar">
+
+    <div className="HeadingBar container-fluid">
    <Header/>
    <Navbar />
    </div>
+
     <Routes>
      <Route path="*" element={<ErrorPage/>} />
      <Route path ='/' element={<ArticlesList/>}></Route>
@@ -27,7 +29,9 @@ function App() {
      <Route path ='/users/login' element={<LogIn/>}></Route>
      <Route path ='/users/logout' element={<LogOut/>}></Route>
      </Routes>
+
      <Footer />
+
      </UserContext.Provider>
 
      </div>)
