@@ -20,10 +20,14 @@ function ArticleCard ({allArticles}){
             .then((data)=>{
                  setLatestNews(data)
             })
+            .catch((err)=>{
+                  console.log(err)
+            })
       },[])
      }
  return <section>
-       <h1 className="container Title">Northcoders News</h1>
+       <h1 className="container Title">North Community News</h1>
+
         {latestNews.article_id ? 
         <div className="LatestArticle container">
               <img className="LatestArticleImg" src={latestNews.article_img_url} />
