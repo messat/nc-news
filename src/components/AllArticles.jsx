@@ -19,9 +19,9 @@ function AllNewsArticles ({sortBy, orderBy}){
     return <section className="ArticleCards container">
 
       {sortArticles.length ? 
-      <div style={{display: "flex", justifyContent: "space-around", gap: "20px", flexWrap: "wrap"}}>
+      <div className="ArticleCardsContainer" style={{display: "flex", justifyContent: "space-around", gap: "20px", flexWrap: "wrap"}}>
       {sortArticles.map((article)=>(
-          <li key={article.article_id}>
+          <li key={article.article_id} >
           <ArticleCards article={article} />
           </li>
       ))}
