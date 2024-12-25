@@ -2,7 +2,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
-import { getSingleArticle } from '../../utils/api';
 import { getAllUsers } from '../../utils/api';
 import { Link } from 'react-router-dom';
 import { cardStyling } from './MUI-Card.elements';
@@ -38,10 +37,10 @@ function ArticleCards({article}) {
         {article.title}
         </Typography>
       </div>
-      <div >
-        <ThumbsUpDownIcon color="action" sx={{ fontSize: 40, ml: 14 }}>
+      <div>
+        <ThumbsUpDownIcon color="action" sx={{ fontSize: 40, ml: 17 }}>
         </ThumbsUpDownIcon>
-        <Typography sx={{ml: 22, mt: -4, fontSize: "20px", fontWeight: "bold"}}>
+        <Typography sx={{ml: 24, mt: -4, fontSize: "20px", fontWeight: "bold"}}>
           {article.votes}
         </Typography>
       </div>

@@ -16,7 +16,7 @@ export default function SelectVariants({sortBy, setSortBy, orderBy, setOrderBy})
   const fontSize = { fontSize: "17px" }
   
   return (
-    <div style={{ display: "flex", justifyContent: "flex-end"  }}>
+    <div style={{ display: "flex", justifyContent: "flex-end"  }} className='SortByFunc' >
       <FormControl variant="standard" sx={{ minWidth: 120, mb: -5 }} >
         <InputLabel id="demo-simple-select-standard-label" sx={fontSize}>Sort By</InputLabel>
         <Select
