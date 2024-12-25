@@ -3,8 +3,12 @@ import { useEffect, useState } from "react"
 import getAllArticles from "../utils/api";
 import LinearWithValueLabel from "./Loading/Loading-UI";
 import AllNewsArticles from "./AllArticles";
+import SelectVariants from "../functions/SortBy";
 function ArticlesList (){
     const [allArticles, setAllArticles]=useState([])
+    const [sortBy, setSortBy ] = useState('');
+    const [orderBy, setOrderBy] = useState('')
+
     const [err, setErr] = useState(null);
     const [isLoading, setIsLoading]= useState(null)
 
@@ -35,7 +39,8 @@ function ArticlesList (){
 
 return <ul>
     <ArticleCard allArticles={allArticles} />
-    <AllNewsArticles allArticles={allArticles}/>
+    <SelectVariants sortBy={sortBy} setSortBy={setSortBy} orderBy={orderBy} setOrderBy={setOrderBy}/>
+    <AllNewsArticles sortBy={sortBy} orderBy={orderBy}/>
 </ul>
 
 }

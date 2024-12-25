@@ -44,6 +44,7 @@ function ArticleCard ({allArticles}){
               <Link to={`/articles/${latestNews.article_id}`}><p className="ReadMore">Read More  <MdReadMore size={40} color="grey"/></p></Link>
         </div>
         : null}
+        
 </section>
 }
 

@@ -1,21 +1,35 @@
+import { useEffect, useState } from "react"
 import ArticleCards from "../atoms/MUI-Card/MUI-Card"
+import {filterArticlesBySort}  from "../utils/api"
 
-function AllNewsArticles ({allArticles}){
-  const filterArticles = allArticles.filter((article, index)=>{
-    return index > 0
-  })
+function AllNewsArticles ({sortBy, orderBy}){
+  const [sortArticles, setSortArticles] = useState([])
 
-  if(allArticles.length){
-return <section className="ArticleCards container">
-  <div style={{display: "flex", justifyContent: "space-between", gap: "20px", flexWrap: "wrap"}}>
-{filterArticles.map((article)=>(
-    <li key={article.article_id}>
-     <ArticleCards article={article} />
-    </li>
-))}
-</div>
-</section>
-  }
+  useEffect(() => {
+    filterArticlesBySort(sortBy, orderBy)
+    .then((data)=>{
+      setSortArticles(data)
+    })
+    .catch((err)=> {
+      console.log(err)
+    })
+  }, [sortBy, orderBy])
+
+
+    return <section className="ArticleCards container">
+
+      {sortArticles.length ? 
+      <div style={{display: "flex", justifyContent: "space-around", gap: "20px", flexWrap: "wrap"}}>
+      {sortArticles.map((article)=>(
+          <li key={article.article_id}>
+          <ArticleCards article={article} />
+          </li>
+      ))}
+      </div>
+      : null}
+
+  </section>
+
 }
 
 export default AllNewsArticles

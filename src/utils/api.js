@@ -4,23 +4,52 @@ const instance = axios.create({
     baseURL:"https://be-news-api-server.onrender.com/api"
 })
 
-async function getAllArticles (topic){
+function getAllArticles (topic, sort_by){
     if(topic){
-        const {data} = await instance.get(`/articles?topic=${topic}`)
-        const topicsArticleArr = data.articles
-        return topicsArticleArr
-    } else {
-        const {data} = await instance.get("/articles")
-          const articlesArr = data.articles
-           return articlesArr
+        return instance.get(`/articles?topic=${topic}`)
+            .then(({data}) =>{
+                const{articles: topicsArticleArr } = data
+                return topicsArticleArr
+            })
+    } 
+    else {
+        return instance.get("/articles")
+            .then(({data}) => {
+                const {articles: articlesArr} = data
+                 return articlesArr
+            })
     }
 }
+
+function filterArticlesBySort(sort_by, order_by) {
+    let apiArticle = `/articles?`
+    if (sort_by){
+        apiArticle += `sort_by=${sort_by}&`
+    }
+    if (order_by) {
+        apiArticle += `order=${order_by}&`
+    }
+    if(!sort_by && !order_by) {
+       return instance.get(`/articles`)
+           .then(({data}) => {
+               const {articles: allArticles } = data
+               return allArticles
+           })
+   } else {
+       return instance.get(apiArticle)
+               .then(({data}) => {
+                   const sortByArticlesArr = data.articles
+                   return sortByArticlesArr
+               })
+   }
+}
+
 
 function getAllTopics (){
     return instance.get(`/topics`)
             .then(({data})=>{
                 return data.topics
-            })
+        })
 }
 
 function getSingleArticle (article_id){
@@ -88,4 +117,4 @@ function patchDownVoteComment (comment_id){
 }
 export default getAllArticles
 
-export {getAllTopics, getSingleArticle, getAllCommentsByArticleId, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick, getAllUsers, postNewComment, singleUser, deleteComment,patchUpVoteComment, patchDownVoteComment }
+export { filterArticlesBySort, getAllTopics, getSingleArticle, getAllCommentsByArticleId, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick, getAllUsers, postNewComment, singleUser, deleteComment,patchUpVoteComment, patchDownVoteComment }
