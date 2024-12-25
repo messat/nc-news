@@ -1,11 +1,30 @@
 import { useEffect, useState } from "react"
 import ArticleCards from "../atoms/MUI-Card/MUI-Card"
-import {filterArticlesBySort}  from "../utils/api"
+import {filterArticlesBySort, paginateArticles}  from "../utils/api"
+import BasicPagination from "../functions/Pagination"
+import SelectLimit from "../functions/SelectLimit"
 
-function AllNewsArticles ({sortBy, orderBy}){
+function AllNewsArticles ({allArticles, sortBy, orderBy}){
   const [sortArticles, setSortArticles] = useState([])
+  const [page, setPage] = useState(1)
+  const [limit, setLimit] = useState(9)
+  const [paginatedNumber, setPaginatedNumber] = useState(Math.ceil(allArticles.length/9))
+  const total = allArticles.length
+  useEffect(()=>{
+    paginateArticles(page, limit)
+    .then((data) => {
+      setSortArticles(data)
+      setPaginatedNumber(() => {
+        return Math.ceil(allArticles.length/data.length)
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }, [page, limit])
 
   useEffect(() => {
+    if(sortBy || orderBy){
     filterArticlesBySort(sortBy, orderBy)
     .then((data)=>{
       setSortArticles(data)
@@ -13,7 +32,8 @@ function AllNewsArticles ({sortBy, orderBy}){
     .catch((err)=> {
       console.log(err)
     })
-  }, [sortBy, orderBy])
+  }}
+  , [sortBy, orderBy])
 
 
     return <section className="ArticleCards container">
@@ -28,6 +48,8 @@ function AllNewsArticles ({sortBy, orderBy}){
       </div>
       : null}
 
+      <BasicPagination page={page} setPage={setPage} paginatedNumber={paginatedNumber}/>
+      <SelectLimit setLimit={setLimit}/>
   </section>
 
 }
