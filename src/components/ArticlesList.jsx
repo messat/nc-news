@@ -40,7 +40,7 @@ function ArticlesList (){
 return <ul>
     <ArticleCard allArticles={allArticles} />
     <SelectVariants sortBy={sortBy} setSortBy={setSortBy} orderBy={orderBy} setOrderBy={setOrderBy}/>
-    <AllNewsArticles sortBy={sortBy} orderBy={orderBy}/>
+    <AllNewsArticles allArticles={allArticles} sortBy={sortBy} orderBy={orderBy}/>
 </ul>
 
 }

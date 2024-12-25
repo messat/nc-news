@@ -352,13 +352,11 @@ li {
  }
 
 
-
-
 .Footer {
     width: 100%;
-    height: 250px;
+    height: 150px;
     background-color: #f34040;
-    margin-top: 6em;
+    margin-top: 3em;
 }
 
 .Footer-Headline {
@@ -367,28 +365,16 @@ li {
     font-weight: 600;
     font-size: 50px;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
 }
 
 .SocialLogos {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    margin-top: 35px;
-    
-}
-
-.LinkedIn {
-    background-color: antiquewhite;
-    border-radius: 20px;
+    margin-top: -15px; 
 }
 
 .Instagram {
     background-color: antiquewhite;
-    border-radius: 20px;
-}
-
-.Twitter {
-    background-color: antiquewhite;
-    border-radius: 20px;
+    border-radius: 16px;
 }

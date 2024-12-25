@@ -44,6 +44,14 @@ function filterArticlesBySort(sort_by, order_by) {
    }
 }
 
+function paginateArticles(pageNumber, limitNumber){
+    return instance.get(`/articles?limit=${limitNumber}&p=${pageNumber}`)
+        .then(({data}) => {
+            const {articles: pagination} = data
+            return pagination
+        })
+}
+
 
 function getAllTopics (){
     return instance.get(`/topics`)
@@ -117,4 +125,4 @@ function patchDownVoteComment (comment_id){
 }
 export default getAllArticles
 
-export { filterArticlesBySort, getAllTopics, getSingleArticle, getAllCommentsByArticleId, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick, getAllUsers, postNewComment, singleUser, deleteComment,patchUpVoteComment, patchDownVoteComment }
+export { filterArticlesBySort, paginateArticles, getAllTopics, getSingleArticle, getAllCommentsByArticleId, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick, getAllUsers, postNewComment, singleUser, deleteComment,patchUpVoteComment, patchDownVoteComment }
