@@ -4,6 +4,7 @@ import { UserContext } from "../context/UserContext";
 import { LuUserCircle2 } from "react-icons/lu";
 import { getAllTopics } from "../utils/api";
 import { TfiMarkerAlt } from "react-icons/tfi";
+import { MdManageAccounts } from "react-icons/md";
 
 
 function Navbar (){
@@ -41,11 +42,13 @@ function Navbar (){
         <div>
           <Link to="/writearticle"><TfiMarkerAlt size={50} className="WriteArticleLogo"/></Link>
           <Link to="/users/logout"><img src={loggedIn.avatar_url} className="LogInLogo AvatarSignInLogo"/></Link>
+          <Link to="/myaccount/viewmyarticles"><MdManageAccounts size={50} style={{marginLeft: "35px"}} className="SettingsLogo" /></Link>
         </div> 
         : 
         <div>
           <Link to="/writearticle"><TfiMarkerAlt size={50} className="WriteArticleLogo"/></Link>
           <Link to="/users/login"><LuUserCircle2 className="LogInLogo" size={50} /></Link>
+
         </div>
         }
       </ul>

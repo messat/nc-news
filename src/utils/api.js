@@ -52,6 +52,10 @@ function paginateArticles(pageNumber, limitNumber){
         })
 }
 
+function deleteArticle(article_id) {
+    return instance.delete(`/articles/${article_id}`)
+}
+
 
 function getAllTopics (){
     return instance.get(`/topics`)
@@ -136,4 +140,4 @@ function patchDownVoteComment (comment_id){
 }
 export default getAllArticles
 
-export { filterArticlesBySort, paginateArticles, getAllTopics, getSingleArticle, getAllCommentsByArticleId, postNewArticle, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick, getAllUsers, postNewComment, singleUser, deleteComment,patchUpVoteComment, patchDownVoteComment }
+export { filterArticlesBySort, paginateArticles, deleteArticle, getAllTopics, getSingleArticle, getAllCommentsByArticleId, postNewArticle, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick, getAllUsers, postNewComment, singleUser, deleteComment,patchUpVoteComment, patchDownVoteComment }

@@ -205,6 +205,14 @@
     color: rgb(45, 45, 233);
 }
 
+.SettingsLogo {
+    color: white;
+}
+
+.SettingsLogo:hover {
+    color: rgb(45, 45, 233);
+}
+
 
 .ArticleCards {
     margin-top: 60px;
