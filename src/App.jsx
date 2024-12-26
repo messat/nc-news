@@ -11,6 +11,7 @@ import { WriteArticle } from "./components/PostArticle";
 import { useState } from "react";
 import Footer from "./Footer";
 import TopicArticlesHeader from "./components/TopicArticlesHeader";
+import { ViewMyArticles } from "./components/MyArticles";
 
 function App() {
   const [loggedIn, setLoggedIn]= useState({})
@@ -28,6 +29,7 @@ function App() {
      <Route path='/writearticle' element={<WriteArticle/>}></Route>
      <Route path ='/articles/:article_id' element={<IdCard/>}></Route>
      <Route path ='/articles/topic/:topic' element={<TopicArticlesHeader/>}></Route>
+     <Route path='/myaccount/viewmyarticles' element={<ViewMyArticles />}></Route>
      <Route path ='/users/login' element={<LogIn/>}></Route>
      <Route path ='/users/logout' element={<LogOut/>}></Route>
      </Routes>
