@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { LuUserCircle2 } from "react-icons/lu";
 import { getAllTopics } from "../utils/api";
+import { TfiMarkerAlt } from "react-icons/tfi";
+
 
 function Navbar (){
   const {loggedIn} = useContext(UserContext)
@@ -35,10 +37,17 @@ function Navbar (){
             </li>
         )}
 
-        {loggedIn.username ? 
-        <Link to="/users/logout"><img src={loggedIn.avatar_url} className="LogInLogo AvatarSignInLogo"/></Link>
+        {loggedIn.username ?
+        <div>
+          <Link to="/writearticle"><TfiMarkerAlt size={50} className="WriteArticleLogo"/></Link>
+          <Link to="/users/logout"><img src={loggedIn.avatar_url} className="LogInLogo AvatarSignInLogo"/></Link>
+        </div> 
         : 
-        <Link to="/users/login"><LuUserCircle2 className="LogInLogo" size={50} /></Link>}
+        <div>
+          <Link to="/writearticle"><TfiMarkerAlt size={50} className="WriteArticleLogo"/></Link>
+          <Link to="/users/login"><LuUserCircle2 className="LogInLogo" size={50} /></Link>
+        </div>
+        }
       </ul>
 
       </nav> 

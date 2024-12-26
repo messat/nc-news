@@ -1,6 +1,5 @@
 import ArticleCards from "../atoms/MUI-Card/MUI-Card"
 function TopicList ({topicArticles}){
-    console.log(topicArticles)
     const allTopics = topicArticles.filter((article, index)=>{
         return index > 0
     })
