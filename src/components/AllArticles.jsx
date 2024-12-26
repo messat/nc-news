@@ -8,15 +8,19 @@ function AllNewsArticles ({allArticles, sortBy, orderBy}){
   const [sortArticles, setSortArticles] = useState([])
   const [page, setPage] = useState(1)
   const [limit, setLimit] = useState(9)
-  const [paginatedNumber, setPaginatedNumber] = useState(Math.ceil(allArticles.length/9))
-  const total = allArticles.length
+  let total = allArticles.length
+  const [paginatedNumber, setPaginatedNumber] = useState(Math.ceil(total/limit))
+  const totalPages = Math.ceil(total / limit);
   useEffect(()=>{
     paginateArticles(page, limit)
     .then((data) => {
       setSortArticles(data)
-      setPaginatedNumber(() => {
-        return Math.ceil(allArticles.length/data.length)
-      })
+      if(data.length){
+        setPaginatedNumber(totalPages)
+      }
+      if (page > totalPages) {
+        setPage(totalPages);
+      }
     })
     .catch((err) => {
       console.log(err)

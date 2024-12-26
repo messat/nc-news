@@ -68,6 +68,17 @@ function getSingleArticle (article_id){
     })
 }
 
+function postNewArticle(article){
+    const newArticle = { 
+        author: article.author,
+        title: article.title,
+        body: article.body, 
+        topic: article.topic.slug,
+        article_img_url: article.imageUrl
+    }
+    return instance.post("/articles", newArticle)
+}
+
 function getAllCommentsByArticleId (article_id){
     return instance.get(`/articles/${article_id}/comments`)
     .then(({data})=>{
@@ -125,4 +136,4 @@ function patchDownVoteComment (comment_id){
 }
 export default getAllArticles
 
-export { filterArticlesBySort, paginateArticles, getAllTopics, getSingleArticle, getAllCommentsByArticleId, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick, getAllUsers, postNewComment, singleUser, deleteComment,patchUpVoteComment, patchDownVoteComment }
+export { filterArticlesBySort, paginateArticles, getAllTopics, getSingleArticle, getAllCommentsByArticleId, postNewArticle, patchUpVotesClick, patchDownVotesClick, patchVipVotesClick, getAllUsers, postNewComment, singleUser, deleteComment,patchUpVoteComment, patchDownVoteComment }

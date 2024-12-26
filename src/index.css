@@ -97,9 +97,13 @@
 .Title {
     text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    margin-top: 20px;
+    margin-top: 40px;
     font-weight: 500;
     font-size: 55px;
+    margin-bottom: 40px;
+}
+
+.LatestArticleInfo {
     margin-bottom: 40px;
 }
 
@@ -115,6 +119,10 @@
     width: 475px;
     height: 350px;
     float: left
+}
+
+.LatestArticle.container {
+    margin-bottom: 20px;
 }
 
 .LatestDate {
@@ -150,14 +158,14 @@
     font-size: large;
     border-right: 2.5px solid #f34040;
     position: relative;
-    margin-right: 41rem;
+    margin-right: 38rem;
 }
 
 .LatestVotes {
     color: rgba(122, 118, 118, 0.805);
     font-weight: 500;
     font-size: large;
-    margin-left: 36.5em;  
+    margin-left: 39em;  
     margin-top: -2.3em;
 }
 
@@ -185,6 +193,15 @@
 }
 
 .LogInLogo:hover {
+    color: rgb(45, 45, 233);
+}
+
+.WriteArticleLogo {
+    margin-right: 50px;
+    color: white;
+}
+
+.WriteArticleLogo:hover {
     color: rgb(45, 45, 233);
 }
 
@@ -237,6 +254,8 @@ li {
 }
 
 
+
+
 @media (max-width: 800px) {
     .NavBar {
         display: flex;
@@ -282,7 +301,7 @@ li {
         flex-direction: column;
         gap: 20px;
         align-items: center;
-      }
+    }
 
     .LatestArticleImg {
         max-width: 100%; 
