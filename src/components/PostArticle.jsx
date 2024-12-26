@@ -32,7 +32,6 @@ export function WriteArticle(){
       };
 
     const handleSubmit = (event) => {
-        // event.preventDefault();
         if(!loggedIn.username){
             navigate("/users/login")
         } 

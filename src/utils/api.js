@@ -79,8 +79,8 @@ function postNewArticle(article){
     return instance.post("/articles", newArticle)
 }
 
-function getAllCommentsByArticleId (article_id){
-    return instance.get(`/articles/${article_id}/comments`)
+function getAllCommentsByArticleId (article_id, pageNumber, limit){
+    return instance.get(`/articles/${article_id}/comments?p=${pageNumber}&limit=${limit}`)
     .then(({data})=>{
         const commentsArr = data.comments
         return commentsArr
