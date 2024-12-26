@@ -21,7 +21,7 @@ export default function SelectLimit({limit, setLimit}) {
           label="Limit"
         >
           <MenuItem value={9} sx={fontSize}>
-            <em>Limit</em>
+            <em>Default</em>
           </MenuItem>
           <MenuItem value={10} sx={fontSize}>10</MenuItem>
           <MenuItem value={11} sx={fontSize}>11</MenuItem>
