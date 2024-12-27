@@ -12,7 +12,7 @@ export default function MultilineTextFields({comment, setComment}) {
     <Box
       component="form"
       sx={{
-        '& .MuiTextField-root': { ml: 9, width: '76ch',mb: 4, mt: -6},
+        '& .MuiTextField-root': { ml: 9, width: '76ch',mb: 3, mt: -6},
       }}
       noValidate
       autoComplete="off"

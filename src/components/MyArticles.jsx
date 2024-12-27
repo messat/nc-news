@@ -23,7 +23,7 @@ if(filterByUsername.length){
                 My Articles
             </Typography>
 
-        <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "20px", marginLeft: "20px", justifyContent: "center"}}>
+        <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "30px", marginLeft: "20px", justifyContent: "center"}}>
             {filterByUsername.map((article) => (
                 <li key={article.article_id}>
                 <MyArticleCard article={article} setUsersArticles={setUsersArticles}/>
