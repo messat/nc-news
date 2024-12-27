@@ -8,16 +8,18 @@ import { BiDislike, BiLike } from "react-icons/bi";
 import Moment from "react-moment";
 import PaginateComments from "../functions/CommentsPagination";
 import LimitComments from "../functions/LimitComments";
+import CommentDeleteAlert from "./Alerts/DeleteCommentAlert";
 
 function Comments ({article_id, singleArticle, setSingleArticle}){
+    const {loggedIn}= useContext(UserContext)
    const [commentsById, setCommentsById] = useState([])
    const [error, setError] = useState(null)
    const [isLoading, setIsLoading] =useState(null)
-   const {loggedIn}= useContext(UserContext)
    const [deleteMessage, setDeleteMessage] = useState(null)
    const [errAxios, setAxios] = useState('')
    const [users, setUsers] = useState([])
    const [commentVote, setCommentVote] = useState({})
+
    const [limit, setLimit] = useState(5)
    const [paginateNumberComments, setPaginateNumberComments] = useState(Math.ceil(singleArticle.comment_count/limit))
    const [page, setPage] = useState(1);
@@ -99,8 +101,10 @@ function filterUser (comment){
         <p className="CommentBody">{comment.body}</p>
         <BiLike size={30} className="ThumbsUp" onClick={()=>handleThumbsUp(comment)}/>
         <p className="VotesOnComment">{commentVote.comment_id === comment.comment_id ? commentVote.votes : comment.votes}</p>
-        {loggedIn.username === comment.author ? <RiDeleteBin6Line  className="DeleteComment" size={30} onClick={()=>()=>handleDeleteComment(comment)} />: null}
         <BiDislike size={30} className="ThumbsDown" onClick={()=>handleThumbsDown(comment)}/>
+        {loggedIn.username === comment.author ? 
+        <RiDeleteBin6Line  className="DeleteComment" size={30} onClick={()=> handleDeleteComment(comment)}/>
+        : null}
        </span>
        </div>
     }
@@ -124,7 +128,7 @@ return <section>
 <PostComment article_id={article_id} setSingleArticle={setSingleArticle} setCommentsById={setCommentsById}/>
 <ol style={{marginTop: "50px", marginLeft:"0px"}}>
 
-     {deleteMessage ? <p>Comment has now deleted</p> : null}
+     {deleteMessage ? <CommentDeleteAlert />: null}
 
         {commentsById.map((comment)=>(
             <li key={comment.comment_id} style={{marginBottom: "-1.5em"}}>

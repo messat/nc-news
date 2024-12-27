@@ -195,7 +195,8 @@
     margin-bottom: 8em;
     font-weight: 600;
     border-right: 2.5px solid #f34040;
-    margin-right: 38em;
+    margin-right: 39em;
+    color: #f34040;
 }
 
 
@@ -232,7 +233,7 @@
 }
 
 .DeleteComment {
-    margin-left: 14em;
+    margin-left: 4em;
     margin-top: -10.3em;
 }
 

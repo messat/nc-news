@@ -12,9 +12,8 @@ const articleByVotes = topicArticles
                                 return index > 0 && index < 6
                             })
 
-
 return (<main className="row">
-        <section className="col-8">
+        <section className="col-xxl-8 col">
             {topicArticles.length ?
                 <li key={topicArticles[0].article_id}>
                     <img className="TopicImg"src={topicArticles[0].article_img_url} alt={"An image of" + topicArticles[0].title}/>
@@ -33,7 +32,7 @@ return (<main className="row">
             : null}
         <TopicList topicArticles={topicArticles}/>
         </section>
-        <aside className="col-4" >
+        <aside className="col-xxl-4 col" >
             <h4 className="PopularNewsHeading">Most Popular in {topicArticles.length && topicArticles[0].topic.slice(0, 1).toUpperCase() + topicArticles[0].topic.slice(1)}</h4>
                 {articleByVotes.length ? 
                     articleByVotes.map((article)=>(

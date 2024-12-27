@@ -27,12 +27,11 @@ function PostComment ({article_id, setCommentsById}){
             setShowAlert(false)
             setLoadingComment(true)
             postNewComment(article_id, newUser)
-            .then(()=>{
-
+            .then((data)=>{
                 setLoadingComment(false)
                 setCommentsById((currentCommentsArr)=>{
                 setComment('')
-            return [{author: loggedIn.username, created_at: Date.now().toString(), body: comment, votes: 0},  ...currentCommentsArr]
+            return [data.data.comment, ...currentCommentsArr]
         })
     })
     .catch(()=>{
@@ -67,7 +66,7 @@ if(loadingComment) {
     return <h2>Loading... Please wait while your comment is being posted</h2>}
 
 return (<section>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{marginBottom: "-70px"}}>
              <span>{!loggedIn.username ? <img src="https://cdn-icons-png.flaticon.com/512/152/152532.png" className="SignInButton" onClick={navigateSignIn}/> : 
              <img src={loggedIn.avatar_url} className="SignInButton" onClick={navigateSignIn}/>}
             <MultilineTextFields setComment={setComment} comment={comment}/></span>
