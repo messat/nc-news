@@ -3,6 +3,7 @@ import React from "react"
 import Moment from "react-moment"
 import { MdReadMore } from "react-icons/md"
 import TopicList from "./TopicList"
+import LoadingCircularProgress from "./Loading/CircularLoading"
 function TopicsPage ({topicArticles}){
 const articleByVotes = topicArticles
                             .sort((a, b)=>{

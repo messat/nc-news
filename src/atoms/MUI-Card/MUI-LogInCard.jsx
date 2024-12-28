@@ -20,7 +20,7 @@ function SignInCard({user}) {
         <Typography  variant="p" sx={{color: "rgba(122, 118, 118, 0.805)", fontWeight: 500, fontSize: "larger", marginLeft: "1em"}}>
             User 
         </Typography>
-        <Typography className="Username" sx={{ display: "flex", flexDirection: 'row', justifyContent: "end", marginTop: "-1.5em", color: "rgba(122, 118, 118, 0.805)", fontWeight: 500, fontSize: "larger", marginRight: "1em"}} variant='p'>
+        <Typography className="Username" sx={{ display: "flex", flexDirection: 'row', justifyContent: "end", marginTop: "-1.5em", color: "#f34040", fontWeight: 500, fontSize: "larger", marginRight: "1em"}} variant='p'>
           @{user.username}
         </Typography>
       </CardContent>

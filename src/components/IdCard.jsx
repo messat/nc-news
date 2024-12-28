@@ -21,14 +21,15 @@ function IdCard (){
       })
     }, [article_id])
 
-if(isLoading) {
-  return (<div className="LoadingScreen">
-      <p className="LoadingText">Loading. Please Wait . . .</p>
-      <LinearWithValueLabel size={50} />
-  </div>)
-}
+   if(isLoading) {
+        return (<div className="LoadingScreen">
+            <p className="LoadingText">Loading. Please Wait . . . while we fetch your content<br></br>This website is using the free version of Render.</p>
+            < LinearWithValueLabel size={50} />
+        </div>)
+    }
+    
 return <section className="container">
-    <IndividualArticle singleArticle={singleArticle} setSingleArticle={setSingleArticle} article_id={article_id}/>
+    <IndividualArticle singleArticle={singleArticle} setSingleArticle={setSingleArticle} article_id={article_id} />
    </section>
 }
 
