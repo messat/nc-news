@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from "react-router-dom"
-import { getSingleArticle } from "../utils/api"
+import getAllArticles, { getSingleArticle } from "../utils/api"
 import { useEffect, useState } from "react"
 import { MdReadMore } from "react-icons/md";
 import Moment from "react-moment";
@@ -9,7 +9,10 @@ import Button from '@mui/joy/Button';
 
 
 function ArticleCard ({allArticles}){
+
       const [latestNews, setLatestNews]= useState('')
+
+   
       if(allArticles.length) {
       useEffect(()=>{
             getSingleArticle(allArticles[0].article_id)
@@ -29,7 +32,7 @@ function ArticleCard ({allArticles}){
               <img className="LatestArticleImg" src={latestNews.article_img_url} />
               <div className='LatestDateAndTime'>
               <ButtonGroup aria-label="radius button group" color="danger"  variant='solid'  sx={{ '--ButtonGroup-radius': '40px'}}>
-                  <Button className='LatestTopic'>   {latestNews.topic.slice(0,1).toUpperCase() + latestNews.topic.slice(1)}   </Button>
+                  <Link to={`/articles/topic/${latestNews.topic}`}><Button className='LatestTopic' sx={{fontSize: "15px"}}>   {latestNews.topic.slice(0,1).toUpperCase() + latestNews.topic.slice(1)}   </Button></Link>
                   </ButtonGroup>
               <Moment format="ddd D MMMM YYYY hh:mm A" className="LatestDate">
                  {latestNews.created_at}

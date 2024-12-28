@@ -9,14 +9,17 @@ import Moment from "react-moment";
 import PaginateComments from "../functions/CommentsPagination";
 import LimitComments from "../functions/LimitComments";
 import CommentDeleteAlert from "./Alerts/DeleteCommentAlert";
+import LoadingCircularProgress from "./Loading/CircularLoading";
 
 function Comments ({article_id, singleArticle, setSingleArticle}){
     const {loggedIn}= useContext(UserContext)
    const [commentsById, setCommentsById] = useState([])
+
    const [error, setError] = useState(null)
-   const [isLoading, setIsLoading] =useState(null)
-   const [deleteMessage, setDeleteMessage] = useState(null)
+   const [isLoading, setIsLoading] =useState(false)
    const [errAxios, setAxios] = useState('')
+
+   const [deleteMessage, setDeleteMessage] = useState(null)
    const [users, setUsers] = useState([])
    const [commentVote, setCommentVote] = useState({})
 
@@ -25,24 +28,29 @@ function Comments ({article_id, singleArticle, setSingleArticle}){
    const [page, setPage] = useState(1);
 
    useEffect(()=>{
-        getAllUsers().then((data)=>{
+        getAllUsers()
+        .then((data)=>{
             setUsers(data)
+        })
+        .catch((err) => {
+            console.log(err)
         })
    },[])
 
     useEffect(()=>{
         setIsLoading(true)
         getAllCommentsByArticleId(article_id, page, limit)
-    .then((commentsArr)=>{
-        setCommentsById(commentsArr)
-        setPaginateNumberComments(()=> {
+        .then((commentsArr)=>{
+            setIsLoading(false)
+            setCommentsById(commentsArr)
+            setPaginateNumberComments(()=> {
             return Math.ceil(singleArticle.comment_count/limit)
         })
-        setIsLoading(false)
-    })
-    .catch((err)=>{
-        setError(err)
-    })
+        })
+        .catch((err)=>{
+            setError(err)
+            console.log(err)
+        })
     },[article_id, page, limit])
 
 
@@ -118,24 +126,21 @@ if(error) {
     return <p>404 Route Not Found</p>
 }
 
-if(isLoading){
-    return <p>Loading Comments Please Wait...</p>
-}
+if(isLoading) return <LoadingCircularProgress />
 
 
 return <section>
+        <PostComment article_id={article_id} setSingleArticle={setSingleArticle} setCommentsById={setCommentsById}/>
+        <ol style={{marginTop: "50px", marginLeft:"0px"}}>
 
-<PostComment article_id={article_id} setSingleArticle={setSingleArticle} setCommentsById={setCommentsById}/>
-<ol style={{marginTop: "50px", marginLeft:"0px"}}>
-
-     {deleteMessage ? <CommentDeleteAlert />: null}
+        {deleteMessage ? <CommentDeleteAlert />: null}
 
         {commentsById.map((comment)=>(
             <li key={comment.comment_id} style={{marginBottom: "-1.5em"}}>
                 {users.length && filterUser(comment)}
             </li>
         ))}
-     </ol>
+        </ol>
 
         {singleArticle.comment_count ? 
      <div style={{ display: "flex", justifyContent: "center", marginTop: "-75px", gap: "40px"}}>

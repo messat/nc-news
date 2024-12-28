@@ -4,10 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import { getAllTopics, postNewArticle } from "../utils/api"
 import { TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Typography} from "@mui/material";
+import LoadingCircularProgress from "./Loading/CircularLoading";
 
 export function WriteArticle(){
-    const {loggedIn, setLoggedIn}= useContext(UserContext)
+    const {loggedIn}= useContext(UserContext)
+
     const navigate = useNavigate();
+
     const [topics, setTopics] = useState([])
     const [formData, setFormData] = useState({
         title: "",
@@ -16,6 +19,7 @@ export function WriteArticle(){
         body: "",
         imageUrl: "",
       });
+
     useEffect(() => {
       getAllTopics()
       .then((data)=> {
@@ -27,25 +31,25 @@ export function WriteArticle(){
     }, [])
     
     const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
+        const { name, value } = event.target
+        setFormData({ ...formData, [name]: value })
       };
 
-    const handleSubmit = (event) => {
-        if(!loggedIn.username){
-            navigate("/users/login")
-        } 
+    const handleSubmit = () => {
+        if(!loggedIn.username) {
+          navigate("/users/login")
+        }
         else {
-            postNewArticle(formData)
-            .then((data) => {
-                console.log(data)
-            })
-            .catch((err) =>{
+              postNewArticle(formData)
+              .then(() => {})
+              .catch((err) =>{
                 console.log(err)
-            })
+              })
             navigate('/')
         }
       }
+
+
         return ( <Box
             sx={{
               display: "flex",
@@ -88,8 +92,8 @@ export function WriteArticle(){
                   value={formData.topic}
                   onChange={handleChange}
                 >
-                  {topics.map((topic, index) => (
-                    <MenuItem key={topic.slug} value={topic}>
+                  {topics.map((topic) => (
+                    <MenuItem key={topic.slug} value={topic} sx={{fontSize: "18px"}}>
                       {topic.slug.slice(0,1).toUpperCase() + topic.slug.slice(1)}
                     </MenuItem>
                   ))}
@@ -120,6 +124,5 @@ export function WriteArticle(){
               </Button>
             </form>
           </Box>
-
         )
 }

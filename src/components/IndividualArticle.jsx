@@ -5,32 +5,47 @@ import { useEffect, useState } from "react"
 import getAllArticles, { getAllUsers } from "../utils/api"
 import { FaRegCommentAlt } from "react-icons/fa";
 import Moment from "react-moment"
+import LoadingCircularProgress from "./Loading/CircularLoading"
 
 
 function IndividualArticle ({singleArticle, setSingleArticle, article_id}){
   const [allUsers, setAllUsers] = useState([])
   const [allArticles, setAllArticles] = useState([])
+
+  const [isLoading, setIsLoading] = useState(false)
+
   useEffect(()=>{
-    getAllUsers().then((data)=>{
+    getAllUsers()
+    .then((data)=>{
       setAllUsers(data)
+    })
+    .catch((err)=>{
+      console.log(err)
     })
 
   }, [singleArticle.article_id])
 
   useEffect(()=>{
-    getAllArticles().then((data)=>{
+    setIsLoading(true)
+    getAllArticles()
+    .then((data)=>{
+      setIsLoading(false)
       setAllArticles(data)
+    })
+    .catch((err)=>{
+      setIsLoading(false)
+      console.log(err)
     })
   },[])
 
 function getUser (author){
-  const filterUser = allUsers.filter((user)=>{
-    return user.username === author
-  })
+
+  const filterUser = allUsers.filter((user)=> user.username === author)
+
   if(filterUser.length){
    return <div>
-    <img className="AvatarID" src={filterUser[0].avatar_url} alt="Avatar logo" />
-   </div>
+            <img className="AvatarID" src={filterUser[0].avatar_url} alt="Avatar logo" />
+          </div>
   }
 }
 
@@ -57,10 +72,13 @@ function getUser (author){
    </div>
 
  </li> 
-   <Comments article_id={article_id} singleArticle={singleArticle} setSingleArticle={setSingleArticle}/>
+   <Comments article_id={article_id} singleArticle={singleArticle} setSingleArticle={setSingleArticle} />
    </div>
+
+
    <aside className="col-4">
     <h4 className="MoreNews">More News</h4>
+    {isLoading ? <LoadingCircularProgress /> :
     <div className="Aside">
     {allArticles.length ? 
     allArticles.map((article)=>(
@@ -77,6 +95,7 @@ function getUser (author){
       </li>
     )) : null }
     </div> 
+  }
    </aside>
    </main>
   }

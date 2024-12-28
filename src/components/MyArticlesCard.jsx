@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -9,10 +8,27 @@ import CardActions from '@mui/material/CardActions';
 import { Link } from 'react-router-dom';
 import Moment from "react-moment";
 import getAllArticles, { deleteArticle } from '../utils/api';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { useState } from 'react';
 
 
 
-export default function MyArticleCard({article, setUsersArticles}) {
+export default function MyArticleCard({article, setUsersArticles, setCountArrayLength}) {
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
 
   return (
     <Card sx={{ minHeight: 400, minWidth: 250, maxWidth: 290, maxHeight: 400  }} className='LogInCard'>
@@ -41,15 +57,40 @@ export default function MyArticleCard({article, setUsersArticles}) {
         <Link to={`/articles/${article.article_id}`}><Button size="medium" color="primary">
           View Article
         </Button></Link>
-        <Button size='medium' sx={{color: "red"}} onClick={()=>{
+        {/* <Button size='medium' sx={{color: "red"}} onClick={()=>{
             deleteArticle(article.article_id)
-            getAllArticles()
-            .then((data) => {
-                setUsersArticles(data)
-            })
+            setCountArrayLength((current) => current -1)
         }}>
             Delete Article
-        </Button>
+        </Button> */}
+         <Button variant="outlined" onClick={handleClickOpen} size='small' color='error'>
+          Delete Article
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Are you sure would you like to delete this article?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            The article is permanently deleted. This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}  >No</Button>
+          <Button onClick={()=>{
+             deleteArticle(article.article_id)
+             setCountArrayLength((current) => current -1)
+              handleClose()
+          }} autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
       </CardActions>
     </Card>
   );

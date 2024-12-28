@@ -7,16 +7,21 @@ import { Link } from 'react-router-dom';
 import { cardStyling } from './MUI-Card.elements';
 import Moment from 'react-moment';
 import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
+import LoadingCircularProgress from '../../components/Loading/CircularLoading';
 
 function ArticleCards({article}) {
     const [users, setUsers] = useState([])
-
+    const [isLoading, setIsLoading] = useState(false)
     useEffect(()=>{
-        getAllUsers().then((data)=>{
+        setIsLoading(true)
+        getAllUsers()
+        .then((data)=>{
             setUsers(data)
+            setIsLoading(false)
         })
         .catch((err)=>{
             console.log(err)
+            setIsLoading(false)
         }) 
     }, [])
 
@@ -24,6 +29,8 @@ function ArticleCards({article}) {
         const newUser = users.filter( user =>(article.author === user.username))
         return <img src={newUser[0].avatar_url} className="Avatar_url"/>
     }
+
+if(isLoading) return <LoadingCircularProgress />
 
   return (
     <Link to={`/articles/${article.article_id}`} style={{textDecoration: "None"}}>
