@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 function SignInCard({user}) {
   return (
-    <Card sx={{ minWidth: 275, width: 50, height: 350, mb: -2}} className='LogInCard'>
+    <Card sx={{ minWidth: 275, width: 50, height: 350, mb: 2}} className='LogInCard'>
       <CardContent>
         <img src={user.avatar_url} alt="Username Avatar"  className="AvatarLogIn"/>
         <Typography variant="p" sx={{color: "rgba(122, 118, 118, 0.805)", fontWeight: 500, fontSize: "larger", marginLeft: "1em"}}>

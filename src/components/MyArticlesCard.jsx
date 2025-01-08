@@ -7,7 +7,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
 import { Link } from 'react-router-dom';
 import Moment from "react-moment";
-import getAllArticles, { deleteArticle } from '../utils/api';
+import { deleteArticle } from '../utils/api';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -17,21 +17,23 @@ import { useState } from 'react';
 
 
 
-export default function MyArticleCard({article, setUsersArticles, setCountArrayLength}) {
+export default function MyArticleCard({article, setCountArrayLength, setDeleteArticleAlert}) {
 
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    setDeleteArticleAlert(!false)
+    setOpen(false)
+  }
 
 
   return (
-    <Card sx={{ minHeight: 400, minWidth: 250, maxWidth: 290, maxHeight: 400  }} className='LogInCard'>
+    
+    <Card sx={{ minHeight: 400, minWidth: 250, maxWidth: 290, maxHeight: 400, mb: 1.5  }} className='LogInCard'>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -57,15 +59,10 @@ export default function MyArticleCard({article, setUsersArticles, setCountArrayL
         <Link to={`/articles/${article.article_id}`}><Button size="medium" color="primary">
           View Article
         </Button></Link>
-        {/* <Button size='medium' sx={{color: "red"}} onClick={()=>{
-            deleteArticle(article.article_id)
-            setCountArrayLength((current) => current -1)
-        }}>
-            Delete Article
-        </Button> */}
          <Button variant="outlined" onClick={handleClickOpen} size='small' color='error'>
           Delete Article
       </Button>
+      {}
       <Dialog
         open={open}
         onClose={handleClose}
@@ -81,12 +78,16 @@ export default function MyArticleCard({article, setUsersArticles, setCountArrayL
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}  >No</Button>
+          <Button onClick={handleClose} autoFocus>No</Button>
           <Button onClick={()=>{
-             deleteArticle(article.article_id)
-             setCountArrayLength((current) => current -1)
-              handleClose()
-          }} autoFocus>
+            deleteArticle(article.article_id)
+            .then(() => null)
+            .catch((error) => {
+              console.log(error)
+            })
+            setCountArrayLength((current) => current -1)
+            handleClose()
+          }}>
             Yes
           </Button>
         </DialogActions>

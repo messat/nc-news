@@ -4,14 +4,21 @@ const instance = axios.create({
     baseURL:"https://be-news-api-server.onrender.com/api"
 })
 
-function getAllArticles (topic, sort_by){
+function getAllArticles (topic, limit, pageNumber){
     if(topic){
         return instance.get(`/articles?topic=${topic}`)
             .then(({data}) =>{
                 const{articles: topicsArticleArr } = data
                 return topicsArticleArr
             })
-    } 
+    } else if (topic && limit && pageNumber){
+        return instance.get(`/articles?topic=${topic}&limit=${limit}&p=${pageNumber}`)
+            .then(({data}) =>{
+                const{articles: paginatedTopics } = data
+                console.log(paginateArticles)
+                return paginatedTopics
+            })
+    }
     else {
         return instance.get("/articles")
             .then(({data}) => {

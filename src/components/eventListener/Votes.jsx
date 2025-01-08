@@ -1,12 +1,25 @@
 import { useState } from "react"
-import { patchUpVotesClick, patchDownVotesClick, patchVipVotesClick } from "../../utils/api"
+import { patchUpVotesClick, patchDownVotesClick } from "../../utils/api"
 import { BiUpvote, BiDownvote } from "react-icons/bi";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+import { AlertVote } from "../../atoms/MUI-Alert";
 
 
 function Votes ({article_id, setSingleArticle, singleArticle}){
+    const {loggedIn} = useContext(UserContext)
+
     const [err, setErr]= useState(null)
+    const [isLoggedIn, setIsLoggedIn] = useState(true)
+    const [open, setOpen] = useState(true)
+
 
 function upVotesClick (){
+    if(!loggedIn.username) {
+        setIsLoggedIn(false)
+        setOpen(true)
+    } else {
+    setIsLoggedIn(true) 
     patchUpVotesClick(article_id)
     .then(()=>{
         setErr(null)
@@ -20,9 +33,15 @@ function upVotesClick (){
     setSingleArticle((currentArticle)=>{
         return {...currentArticle, votes: currentArticle.votes + 1}
     })
+    }
 }
 
 function downVotesClick (){
+    if(!loggedIn.username){
+        setIsLoggedIn(false)
+        setOpen(true)
+    } else {
+    setIsLoggedIn(true)
     patchDownVotesClick(article_id)
     .then(()=>{
         setErr(null)
@@ -36,62 +55,29 @@ function downVotesClick (){
         return {...currentArticle, votes: currentArticle.votes - 1}
     })
 }
+}
 
 
 
 if(err) return <p>Your Vote Was Not Casted. Please Try Again.</p>
-return <section className="Votes">
-    <BiUpvote className="Upvote" size={40} onClick={()=>{
-       upVotesClick()
-      }}/>
+
+return <section className="">
+    {!isLoggedIn ? <AlertVote open={open} setOpen={setOpen}/> : null}
+    
+    <div className="Votes">
+    <BiUpvote className="Upvote" size={45} onClick={()=>{
+        upVotesClick()
+    }}/>
+    
       {singleArticle.votes ? <p className="Count">{singleArticle.votes}</p> : <p className="Count">Vote</p>}
-   <BiDownvote className="Downvote" size={40} onClick={()=>{
-         downVotesClick()
-   }} /> 
+   <BiDownvote className="Downvote" size={45} onClick={()=>{
+       downVotesClick()
+    }} />
+    </div>
 
-   
-
-
-
-   <br></br>
    
    {err ? <p>Something Went Wrong. Please try Again</p>: null}
    </section>
 }
 
 export default Votes
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function UpvotesClick (article_id){
-   
-//     // let votesCount = singleArticle.votes
-//     // const [upvote, setUpVote] = useState(votesCount)
-    
-        // axios
-        // .patch
-        // (`https://be-news-api-server.onrender.com/api/articles/${article_id}`, {inc_votes: 1})
-        // .then(({data})=>{
-        //     console.log(data);
-            // setSingleArticle(data)
-        // })
-        
-//     // setSingleArticle((currentArticle)=>{
-//     //     currentArticle.votes + 1
-//     // })
-// }
-
-// export default UpvotesClick

@@ -2,7 +2,7 @@ import Pagination from '@mui/material/Pagination';
 
 export default function BasicPagination({page, setPage, paginatedNumber}) {
     const handleChange = (event, value) => {
-      setPage(value);
+      setPage(value)
     };
     
     return (
@@ -10,7 +10,7 @@ export default function BasicPagination({page, setPage, paginatedNumber}) {
         <Pagination 
         count={paginatedNumber} 
         color="primary" 
-        size='medium' 
+        size='large' 
         sx={{ mt: -3}}
         page={page}
         onChange={handleChange}

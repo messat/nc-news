@@ -4,9 +4,6 @@ import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { IoLogoGithub } from "react-icons/io";
 
-
-
-
 function Footer (){
 
     return <div className="Footer">

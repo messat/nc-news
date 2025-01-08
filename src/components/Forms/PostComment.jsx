@@ -8,14 +8,16 @@ import Button from '@mui/material/Button';
 import {ErrorAlert, SuccessAlert} from '../../atoms/MUI-Alert';
 
 
-function PostComment ({article_id, setCommentsById}){
+function PostComment ({article_id, setCommentsById, setSingleArticle}){
     const {loggedIn} = useContext(UserContext)
     const [comment, setComment]=useState('')
     const [err, setErr]=useState(false)
     const [loadingComment, setLoadingComment] = useState(null)
     const navigate = useNavigate()
+
     const [showAlert, setShowAlert] = useState(false)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+    const [open, setOpen] = useState(true)
 
     
     function handleSubmit (event){
@@ -31,18 +33,21 @@ function PostComment ({article_id, setCommentsById}){
                 setLoadingComment(false)
                 setCommentsById((currentCommentsArr)=>{
                 setComment('')
-            return [data.data.comment, ...currentCommentsArr]
-        })
-    })
-    .catch(()=>{
-       setErr(true)
-    })
-    }  else {
-        setShowSuccessAlert(false)
-        setShowAlert(true)
+                return [data.data.comment, ...currentCommentsArr]
+                })
+                setSingleArticle((curr) => {
+                    return {...curr, comment_count: curr.comment_count + 1 }
+                })
+            })
+            .catch(()=>{
+                setErr(true)
+            })
+        }  else {
+            setShowSuccessAlert(false)
+            setShowAlert(true)
+            setOpen(true)
+        }
     }
-}
-
 
 
     function handleReset(){
@@ -66,14 +71,14 @@ if(loadingComment) {
     return <h2>Loading... Please wait while your comment is being posted</h2>}
 
 return (<section>
-        <form onSubmit={handleSubmit} style={{marginBottom: "-70px"}}>
+        <form onSubmit={handleSubmit}>
              <span>{!loggedIn.username ? <img src="https://cdn-icons-png.flaticon.com/512/152/152532.png" className="SignInButton" onClick={navigateSignIn}/> : 
              <img src={loggedIn.avatar_url} className="SignInButton" onClick={navigateSignIn}/>}
             <MultilineTextFields setComment={setComment} comment={comment}/></span>
             <Button sx={{backgroundColor: "primary", marginLeft: "46em"}} onClick={removeText}>Cancel</Button>        
             <Button type="submit" sx={{backgroundColor: "grey", color: "white", marginLeft: "53em", marginTop: "-4.4em"}}>Comment</Button>
-            {showAlert ? <ErrorAlert /> : null}
-            {showSuccessAlert ? <SuccessAlert/> : null}
+            {showAlert ? <ErrorAlert open={open} setOpen={setOpen}/> : null}
+            {showSuccessAlert ? <SuccessAlert open={open} setOpen={setOpen}/> : null}
             </form>
         </section>  
 )

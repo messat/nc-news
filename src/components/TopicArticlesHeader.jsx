@@ -9,9 +9,11 @@ function TopicArticlesHeader (){
 
     const [topicArticles, setTopicArticles] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const [page, setPage] = useState(1)
+    const [limit, setLimit] = useState(4)
     useEffect(()=>{
         setIsLoading(true)
-        getAllArticles(topic)
+        getAllArticles(topic, limit, page)
         .then((data)=>{
             setTopicArticles(data)
             setIsLoading(false)
@@ -33,11 +35,11 @@ return (<section className="container">
     <header>
         <hr className="HorizontalLine"></hr> 
         <h1 className="TopicHeading">{topic.slice(0,1).toUpperCase() + topic.slice(1)}</h1> 
-      
         <hr></hr>
     </header>
+    
     <h3 className="Headline">Latest News</h3>
-    <TopicsPage topicArticles={topicArticles}/>
+    <TopicsPage topicArticles={topicArticles} page={page} setPage={setPage}/>
     </section>
     )
 }

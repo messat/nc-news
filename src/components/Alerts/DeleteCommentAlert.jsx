@@ -9,7 +9,7 @@ export default function CommentDeleteAlert() {
   const [isVisible, setIsVisible] = useState(true)
   return (
     
-    <Box sx={{ display: 'flex', gap: 2, width: '100%', flexDirection: 'column', marginBottom: "23px" }}>
+    <Box sx={{ display: 'flex', gap: 2, width: '100%', flexDirection: 'column', marginBottom: "23px", marginLeft: "-7px" }}>
       {isVisible &&  <Alert variant="soft" color='success'
       endDecorator={
         <IconButton variant="plain" size="small" color="neutral">
@@ -21,3 +21,5 @@ export default function CommentDeleteAlert() {
     </Box>
   );
 }
+
+

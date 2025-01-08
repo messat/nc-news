@@ -38,8 +38,11 @@ function IndividualArticle ({singleArticle, setSingleArticle, article_id}){
     })
   },[])
 
-function getUser (author){
+  const moreArticles = allArticles.filter((article, index) => {
+    return article.article_id !== parseInt(article_id) && index < 17
+  })
 
+function getUser (author){
   const filterUser = allUsers.filter((user)=> user.username === author)
 
   if(filterUser.length){
@@ -68,7 +71,7 @@ function getUser (author){
   <Votes article_id={article_id} setSingleArticle={setSingleArticle} singleArticle={singleArticle}/>
   <div className="CommentSection">
    <p className="CommentCount">{singleArticle.comment_count}</p>
-   <FaRegCommentAlt className="CommentIcon" size={40}/>
+   <FaRegCommentAlt className="CommentIcon" size={46}/>
    </div>
 
  </li> 
@@ -76,13 +79,14 @@ function getUser (author){
    </div>
 
 
-   <aside className="col-4">
+
+   <aside className="col-4"> 
     <h4 className="MoreNews">More News</h4>
     {isLoading ? <LoadingCircularProgress /> :
     <div className="Aside">
     {allArticles.length ? 
-    allArticles.map((article)=>(
-      <li key={article.article_id}>
+    moreArticles.map((article)=>(
+      <li key={article.article_id} className="MoreArticles">
         <Link to={`/articles/${article.article_id}`} style={{textDecoration: "None", color: "black"}}><h5 className="Titles">{article.title}</h5>
         <div style={{display: "flex", flexDirection: "row",justifyContent: "space-between", alignItems: "end"}}>
         <Moment format="D MMMM YYYY" style={{marginLeft: "-17.2em", marginBottom: "-0.5em", fontWeight: 500, color: "grey", fontStyle: "italic"}}>
