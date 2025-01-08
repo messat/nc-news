@@ -5,11 +5,13 @@ import getAllArticles from "../utils/api";
 import Typography from '@mui/material/Typography';
 import  MyArticleCard  from "./MyArticlesCard.jsx"
 import LinearWithValueLabel from "./Loading/Loading-UI.jsx";
+import { DeleteArticleAlert } from "./Alerts/DeleteArticleAlert.jsx";
 
 export function ViewMyArticles (){
     const {loggedIn} = useContext(UserContext)
     const [usersArticles, setUsersArticles] = useState([])
     const [countArrayLength, setCountArrayLength] = useState(0)
+    const [deleteArticleAlert, setDeleteArticleAlert] = useState(false)
 
     useEffect(()=>{
         getAllArticles()
@@ -30,11 +32,12 @@ if(filterByUsername.length){
             <Typography variant="h3" gutterBottom style={{display: "flex", justifyContent: "center", marginTop: "30px", marginBottom: "30px"}}>
                 My Articles
             </Typography>
+            {deleteArticleAlert && <DeleteArticleAlert />}
 
           <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "30px", marginLeft: "20px", justifyContent: "center"}}>
             {filterByUsername.map((article) => (
                 <li key={article.article_id}>
-                <MyArticleCard article={article} setUsersArticles={setUsersArticles} setCountArrayLength={setCountArrayLength}/>
+                <MyArticleCard article={article} setCountArrayLength={setCountArrayLength} setDeleteArticleAlert={setDeleteArticleAlert} deleteArticleAlert={deleteArticleAlert}/>
                 </li>
             ))} 
         

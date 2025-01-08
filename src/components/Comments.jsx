@@ -10,11 +10,14 @@ import PaginateComments from "../functions/CommentsPagination";
 import LimitComments from "../functions/LimitComments";
 import CommentDeleteAlert from "./Alerts/DeleteCommentAlert";
 import LoadingCircularProgress from "./Loading/CircularLoading";
+import { IoMdThumbsUp } from "react-icons/io";
+import { IoMdThumbsDown } from "react-icons/io";
+import { AlertVote, VoteLogOutAlert } from "../atoms/MUI-Alert";
+
 
 function Comments ({article_id, singleArticle, setSingleArticle}){
     const {loggedIn}= useContext(UserContext)
    const [commentsById, setCommentsById] = useState([])
-
    const [error, setError] = useState(null)
    const [isLoading, setIsLoading] =useState(false)
    const [errAxios, setAxios] = useState('')
@@ -22,6 +25,9 @@ function Comments ({article_id, singleArticle, setSingleArticle}){
    const [deleteMessage, setDeleteMessage] = useState(null)
    const [users, setUsers] = useState([])
    const [commentVote, setCommentVote] = useState({})
+   const [downVoteClick, setDownVoteClick] = useState(false)
+   const [open, setOpen] = useState(!true)
+   const [alertComment, setAlertComment] = useState({})
 
    const [limit, setLimit] = useState(5)
    const [paginateNumberComments, setPaginateNumberComments] = useState(Math.ceil(singleArticle.comment_count/limit))
@@ -45,7 +51,7 @@ function Comments ({article_id, singleArticle, setSingleArticle}){
             setCommentsById(commentsArr)
             setPaginateNumberComments(()=> {
             return Math.ceil(singleArticle.comment_count/limit)
-        })
+            })
         })
         .catch((err)=>{
             setError(err)
@@ -54,7 +60,7 @@ function Comments ({article_id, singleArticle, setSingleArticle}){
     },[article_id, page, limit])
 
 
-    function handleDeleteComment (comment){
+    function handleDeleteComment(comment){
         setAxios(false)
         deleteComment(comment)
         .then(()=>{
@@ -65,6 +71,9 @@ function Comments ({article_id, singleArticle, setSingleArticle}){
                 })
                 return filterComments
             })
+            setSingleArticle((curr) => {
+                return {...curr, comment_count: curr.comment_count - 1 }
+            })
         })
         .catch((err)=>{
             setAxios(err)
@@ -73,6 +82,8 @@ function Comments ({article_id, singleArticle, setSingleArticle}){
     }
 
     function handleThumbsUp (comment){
+        if(loggedIn.username){
+        setAlertComment(false)
         setCommentVote(comment)
         patchUpVoteComment(comment.comment_id)
         .then(({data})=>{
@@ -80,18 +91,34 @@ function Comments ({article_id, singleArticle, setSingleArticle}){
                 return {...currentComment, votes: data.comment.votes}
             })
         })
+        .catch((err) => {
+            console.log(err)
+        })
+        } else {
+            setAlertComment(comment)
+            setOpen(true)
+        }
     }
 
     function handleThumbsDown (comment){
-        setCommentVote(comment)
-        patchDownVoteComment(comment.comment_id)
-        .then(({data})=>{
-            setCommentVote((currentComment)=>{
-                return {...currentComment, votes: data.comment.votes}
+        if(loggedIn.username){
+            setAlertComment(false)
+            setDownVoteClick(!false)
+            setCommentVote(comment)
+            patchDownVoteComment(comment.comment_id)
+            .then(({data})=>{
+                setCommentVote((currentComment)=>{
+                    return {...currentComment, votes: data.comment.votes}
+                })
             })
-        })
+            .catch((err) =>{
+                console.log(err)
+            })
+        } else {
+            setAlertComment(comment)
+            setOpen(true)
+        }
     }
-
 
 
 
@@ -107,12 +134,18 @@ function filterUser (comment){
             {comment.created_at}
         </Moment>
         <p className="CommentBody">{comment.body}</p>
-        <BiLike size={30} className="ThumbsUp" onClick={()=>handleThumbsUp(comment)}/>
+
+        {(comment.comment_id === commentVote.comment_id) && loggedIn.username ? 
+        <IoMdThumbsUp size={30} className="ThumbsUp"/> :<BiLike size={30} className="ThumbsUp" onClick={()=>handleThumbsUp(comment)}/> }
         <p className="VotesOnComment">{commentVote.comment_id === comment.comment_id ? commentVote.votes : comment.votes}</p>
-        <BiDislike size={30} className="ThumbsDown" onClick={()=>handleThumbsDown(comment)}/>
+        
+        {comment.comment_id === commentVote.comment_id && downVoteClick && loggedIn.username ? <IoMdThumbsDown size={30} className="ThumbsDown"/>  :
+        <BiDislike size={30} className="ThumbsDown" onClick={()=>handleThumbsDown(comment)}/> }
+        
         {loggedIn.username === comment.author ? 
         <RiDeleteBin6Line  className="DeleteComment" size={30} onClick={()=> handleDeleteComment(comment)}/>
         : null}
+        {open && alertComment && comment.comment_id === alertComment.comment_id ? <VoteLogOutAlert open={open} setOpen={setOpen}/> : null}
        </span>
        </div>
     }
@@ -130,8 +163,8 @@ if(isLoading) return <LoadingCircularProgress />
 
 
 return <section>
-        <PostComment article_id={article_id} setSingleArticle={setSingleArticle} setCommentsById={setCommentsById}/>
-        <ol style={{marginTop: "50px", marginLeft:"0px"}}>
+        <PostComment article_id={article_id} setSingleArticle={setSingleArticle} setCommentsById={setCommentsById} singleArticle={singleArticle}/>
+        <ol style={{marginTop: "6x0px", marginLeft:"0px"}}>
 
         {deleteMessage ? <CommentDeleteAlert />: null}
 

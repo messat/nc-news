@@ -4,7 +4,8 @@ import getAllArticles from "../utils/api";
 import LinearWithValueLabel from "./Loading/Loading-UI";
 import AllNewsArticles from "./AllArticles";
 import SelectVariants from "../functions/SortBy";
-function ArticlesList (){
+
+function ArticlesList ({ isNewArticle, postArticleAlert, logInAlert, setLogInAlert}){
     const [allArticles, setAllArticles]=useState([])
     const [sortBy, setSortBy ] = useState('');
     const [orderBy, setOrderBy] = useState('')
@@ -24,7 +25,7 @@ function ArticlesList (){
         setErr(err)
         setIsLoading(false)
         })
-    }, [])
+    }, [isNewArticle])
 
     if(err){
         return <p className="Error-Message">404 Not Found. Try Again</p>
@@ -38,7 +39,7 @@ function ArticlesList (){
     }
 
 return <ul>
-    <ArticleCard allArticles={allArticles} />
+    <ArticleCard allArticles={allArticles} postArticleAlert={postArticleAlert} logInAlert={logInAlert} setLogInAlert={setLogInAlert}/>
     <SelectVariants sortBy={sortBy} setSortBy={setSortBy} orderBy={orderBy} setOrderBy={setOrderBy}/>
     <AllNewsArticles allArticles={allArticles} sortBy={sortBy} orderBy={orderBy}/>
 </ul>

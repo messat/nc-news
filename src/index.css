@@ -23,6 +23,7 @@
 }
 
 
+
 .HeadingBar {
     position: sticky;
     top: 0;
@@ -81,8 +82,6 @@
 .NavLinks li {
     display: inline-block;
 }
-  
-
 
 
 .Hamburger {
@@ -93,6 +92,7 @@
     border: none;
     cursor: pointer;
 }
+
 
 .Title {
     text-align: center;
@@ -133,7 +133,6 @@
     position: relative;
     top: -1.8em;
     left: 6em;
-
 }
 
 .LatestArticleTitle {
@@ -370,20 +369,28 @@ li {
         justify-content: center; 
         align-items: center; 
         flex-direction: column;
-    }
-    
-
-    
-   
-    
+    } 
  }
 
+
+body {
+    min-height: 100vh;
+    position: relative;
+}
+
+body::after {
+    content: '';
+    display: block;
+    height: 150px;
+}
 
 .Footer {
     width: 100%;
     height: 150px;
     background-color: #f34040;
     margin-top: 3em;
+    position: absolute;
+    bottom: 0;
 }
 
 .Footer-Headline {

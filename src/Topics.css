@@ -46,24 +46,22 @@
 
 .TopicDate {
     position: relative;
-    top: 38px;
-    left: -25px;
+    top: 35px;
+    left: 32px;
 }
 
 .TopicTitle {
     position: relative;
-    top: 45px;
-    left: 40px;
-
+    top: 20px;
+    left: 24px;
 }
 
 .TopicBody {
     position: relative;
-    top: 55px;
-    left: 40px;
-    right: 10px;
+    top: 35px;
+    left: 24px;
     text-align: justify;
-    margin-right: 3em;
+    margin-right: 1.3em;
     line-height: 1.5em;
     font-size: larger;
 }  
@@ -74,8 +72,8 @@
     font-size: large;
     border-right: 2.5px solid #f34040;
     position: relative;
-    left: 39px;
-    top: 65px;
+    left: 26px;
+    top: 40px;
     margin-right: 15em;
 }
 
@@ -83,8 +81,8 @@
     color: rgba(122, 118, 118, 0.805);
     font-weight: 500;
     font-size: large;
-    margin-left: 36em;
-    margin-top: 2.1em;
+    margin-left: 35.5em;
+    margin-top: -0.1em;
 }
 
 .ReadMoreOnTopic {

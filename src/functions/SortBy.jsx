@@ -38,7 +38,7 @@ export default function SelectVariants({sortBy, setSortBy, orderBy, setOrderBy})
         </Select>
       </FormControl>
 
-      <FormControl variant="standard" sx={{ minWidth: 120, ml: 6, mr: 31, mb: -4 }}>
+      <FormControl variant="standard" sx={{ minWidth: 120, ml: 6, mr: 42, mb: -4 }}>
         <InputLabel id="demo-simple" sx={fontSize}>Order By</InputLabel>
         <Select
           labelId="demo-simple"
@@ -48,7 +48,7 @@ export default function SelectVariants({sortBy, setSortBy, orderBy, setOrderBy})
           label="Order"
           sx={{ width: "120%"}}
         >
-          <MenuItem value="" sx={fontSize}>
+          <MenuItem value={"DESC"} sx={fontSize}>
             <em>Order</em>
           </MenuItem>
           <MenuItem value={"ASC"} sx={fontSize}>Ascending</MenuItem>

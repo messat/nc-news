@@ -15,6 +15,7 @@ function LogOut (){
 
     function handleLogOut (){
       setLoggedIn({})
+      localStorage.clear();
       {<LoadingCircularProgress />}
       navigateUser('/users/login')
     }

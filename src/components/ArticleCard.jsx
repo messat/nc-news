@@ -1,20 +1,23 @@
-import * as React from 'react';
 import { Link } from "react-router-dom"
-import getAllArticles, { getSingleArticle } from "../utils/api"
+import { getSingleArticle } from "../utils/api"
 import { useEffect, useState } from "react"
 import { MdReadMore } from "react-icons/md";
 import Moment from "react-moment";
 import ButtonGroup from '@mui/joy/ButtonGroup';
 import Button from '@mui/joy/Button';
+import { ArticleAlert } from "./Alerts/AlertArticlePost";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
+import { LoggedInAlert } from "../atoms/MUI-Alert";
 
 
-function ArticleCard ({allArticles}){
-
+function ArticleCard ({allArticles, postArticleAlert, logInAlert, setLogInAlert}){
+      const {loggedIn} = useContext(UserContext)
       const [latestNews, setLatestNews]= useState('')
-
+      const [open, setOpen] = useState(true)
    
-      if(allArticles.length) {
       useEffect(()=>{
+            if(allArticles.length) {
             getSingleArticle(allArticles[0].article_id)
             .then((data)=>{
                  setLatestNews(data)
@@ -22,13 +25,15 @@ function ArticleCard ({allArticles}){
             .catch((err)=>{
                   console.log(err)
             })
+            }
       },[])
-}
+
  return <section className='LatestArticleInfo'>
        <h1 className="container Title">North Community News</h1>
-
         {latestNews.article_id ? 
         <div className="LatestArticle container">
+              {postArticleAlert && <ArticleAlert />}
+              {loggedIn.username && logInAlert && <LoggedInAlert setLogInAlert={setLogInAlert} open={open} setOpen={setOpen}/> }
               <img className="LatestArticleImg" src={latestNews.article_img_url} />
               <div className='LatestDateAndTime'>
               <ButtonGroup aria-label="radius button group" color="danger"  variant='solid'  sx={{ '--ButtonGroup-radius': '40px'}}>
@@ -39,7 +44,7 @@ function ArticleCard ({allArticles}){
               </Moment>
               </div>
               <h3 className="LatestArticleTitle">{latestNews.title}</h3>
-              <p className="LatestDescription"><span className="FirstLetter">{latestNews.body.slice(0,1)}</span>{latestNews.body.slice(1, 250)}</p>
+              <p className="LatestDescription"><span className="FirstLetter">{latestNews.body.slice(0,1)}</span>{latestNews.body.slice(1, 250)} {latestNews.body.length > 250 ? " ...": null}</p>
               <div className='LatestAuthorAndVotes'>
               <p className="LatestAuthor">@{latestNews.author}</p>
               <p className="LatestVotes">{latestNews.votes} Upvotes</p>

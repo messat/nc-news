@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
@@ -10,14 +9,13 @@ export default function MultilineTextFields({comment, setComment}) {
 
   return (
     <Box
-      component="form"
       sx={{
         '& .MuiTextField-root': { ml: 9, width: '76ch',mb: 3, mt: -6},
       }}
       noValidate
       autoComplete="off"
     >
-      <div>
+      
         <TextField 
           id="standard-textarea"
           label="Add a comment..."
@@ -29,7 +27,7 @@ export default function MultilineTextFields({comment, setComment}) {
           value={comment}
           required
         />
-      </div>
+      
     </Box>
   );
 }

@@ -4,11 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import { getAllTopics, postNewArticle } from "../utils/api"
 import { TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Typography} from "@mui/material";
-import LoadingCircularProgress from "./Loading/CircularLoading";
 
-export function WriteArticle(){
+export function WriteArticle({ isNewArticle, setIsNewArticle, setPostArticleAlert }){
     const {loggedIn}= useContext(UserContext)
-
     const navigate = useNavigate();
 
     const [topics, setTopics] = useState([])
@@ -19,6 +17,8 @@ export function WriteArticle(){
         body: "",
         imageUrl: "",
       });
+
+     
 
     useEffect(() => {
       getAllTopics()
@@ -40,12 +40,18 @@ export function WriteArticle(){
           navigate("/users/login")
         }
         else {
+          if(!formData.imageUrl){
+            formData.imageUrl = "https://img.freepik.com/premium-vector/nc-logo-design_705304-299.jpg"
+          }
               postNewArticle(formData)
-              .then(() => {})
+              .then(() => {
+                setIsNewArticle(!isNewArticle)
+              })
               .catch((err) =>{
                 console.log(err)
               })
-            navigate('/')
+              setPostArticleAlert(!false)
+              navigate('/')
         }
       }
 
